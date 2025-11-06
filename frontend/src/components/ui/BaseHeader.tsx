@@ -23,13 +23,13 @@ const BaseHeader = ({
   rightActions
 }: BaseHeaderProps) => {
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const { logout } = useAuth();
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     if (onLogout) {
       onLogout();
     } else {
-      await signOut();
+      logout();
       navigate('/');
     }
   };
