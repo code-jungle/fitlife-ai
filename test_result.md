@@ -101,3 +101,235 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "FitLife AI - App de fitness com cadastro completo, dashboard com 3 abas (Sugestões IA, Histórico, Perfil), integração Gemini para treinos e dietas personalizadas"
+
+backend:
+  - task: "Auth System - Register endpoint"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint POST /api/auth/register implementado com criação de usuário e perfil completo. Retorna JWT token."
+  
+  - task: "Auth System - Login endpoint"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint POST /api/auth/login implementado com verificação de senha e JWT token."
+  
+  - task: "Profile - Get profile endpoint"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint GET /api/profile implementado com cálculo de IMC e categoria."
+  
+  - task: "Profile - Update profile endpoint"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint PUT /api/profile implementado para atualizar dados do perfil."
+  
+  - task: "Profile - Delete account endpoint"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint DELETE /api/user implementado para deletar conta e todos os dados associados."
+  
+  - task: "Suggestions - Generate workout"
+    implemented: true
+    working: "NA"
+    file: "server.py, gemini_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint POST /api/suggestions/workout implementado com Gemini AI. Prompts personalizados baseados em perfil, local de treino e atividades atuais."
+  
+  - task: "Suggestions - Generate nutrition"
+    implemented: true
+    working: "NA"
+    file: "server.py, gemini_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint POST /api/suggestions/nutrition implementado com Gemini AI. Foco em alimentos baratos e acessíveis."
+  
+  - task: "Suggestions - Get history"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint GET /api/suggestions/history implementado retornando workouts e nutrition separados."
+  
+  - task: "Suggestions - Delete suggestion"
+    implemented: true
+    working: "NA"
+    file: "server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint DELETE /api/suggestions/{id} implementado com verificação de ownership."
+
+frontend:
+  - task: "Auth Context with JWT"
+    implemented: true
+    working: "NA"
+    file: "contexts/AuthContext.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Contexto de autenticação implementado com JWT, localStorage e refresh de perfil."
+  
+  - task: "API Service"
+    implemented: true
+    working: "NA"
+    file: "services/api.ts"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Serviço de API com axios, interceptors para token JWT e tratamento de erros."
+  
+  - task: "Registration Page - Complete form"
+    implemented: true
+    working: "NA"
+    file: "pages/RegisterNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Página de registro com TODOS os campos: nome, email, senha, idade (12-100), peso (30-300kg), altura (120-250cm), objetivos, tipo treino, atividades atuais, restrições alimentares."
+  
+  - task: "Login Page"
+    implemented: true
+    working: "NA"
+    file: "pages/LoginNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Página de login implementada com validação e integração com AuthContext."
+  
+  - task: "Dashboard - Tab Sugestões IA"
+    implemented: true
+    working: "NA"
+    file: "pages/DashboardNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Aba implementada com aviso educacional, cards de treino/nutrição, botões gerar e exibição das sugestões."
+  
+  - task: "Dashboard - Tab Histórico"
+    implemented: true
+    working: "NA"
+    file: "pages/DashboardNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Aba implementada com lista de workouts e nutrition, botões view e delete com modal de visualização."
+  
+  - task: "Dashboard - Tab Perfil"
+    implemented: true
+    working: "NA"
+    file: "pages/DashboardNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Aba implementada com info completa, card de IMC com cálculo e categoria, botão editar perfil, danger zone com deletar conta."
+  
+  - task: "Profile Edit Modal"
+    implemented: true
+    working: "NA"
+    file: "pages/DashboardNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Modal de edição de perfil implementado com todos os campos editáveis incluindo atividades físicas atuais."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Auth System - Register endpoint"
+    - "Auth System - Login endpoint"
+    - "Profile - Get profile endpoint"
+    - "Profile - Update profile endpoint"
+    - "Suggestions - Generate workout"
+    - "Suggestions - Generate nutrition"
+    - "Suggestions - Get history"
+    - "Suggestions - Delete suggestion"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Backend completo implementado com FastAPI + MongoDB + JWT auth + Gemini AI integration. Todos os endpoints criados. Frontend com novo sistema de auth (removido Supabase), páginas de login/registro completas e dashboard com 3 abas. Pronto para testar backend."
