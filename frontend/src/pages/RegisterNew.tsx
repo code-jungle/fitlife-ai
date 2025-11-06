@@ -269,6 +269,7 @@ const RegisterNew = () => {
                         <SelectItem value="ar_livre">Ao ar livre</SelectItem>
                       </SelectContent>
                     </Select>
+                    {errors.training_type && <p className="text-sm text-red-500">{errors.training_type}</p>}
                   </div>
 
                   {/* Current Activities */}
