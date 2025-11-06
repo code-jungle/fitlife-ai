@@ -198,7 +198,11 @@ class FitLifeAPITester:
             if isinstance(data, dict) and all(key in data for key in ["id", "type", "content"]):
                 content_length = len(data.get("content", ""))
                 if data.get("type") == "workout" and content_length > 100:
-                    self.log_test("Generate Workout", True, f"Workout generated successfully ({content_length} chars)")
+                    # Check if content looks like AI-generated (not a fallback)
+                    content = data.get("content", "")
+                    is_ai_generated = "PLANO DE TREINO" in content and "Gemini" not in content and len(content) > 1000
+                    ai_status = "AI-generated" if is_ai_generated else "fallback"
+                    self.log_test("Generate Workout", True, f"Workout generated successfully ({content_length} chars, {ai_status})")
                     return data.get("id")  # Return suggestion ID for later deletion test
                 else:
                     self.log_test("Generate Workout", False, "Workout content too short or invalid type", response)
