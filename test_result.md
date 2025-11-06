@@ -340,19 +340,11 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "Auth System - Register endpoint"
-    - "Auth System - Login endpoint"
-    - "Profile - Get profile endpoint"
-    - "Profile - Update profile endpoint"
-    - "Suggestions - Generate workout"
-    - "Suggestions - Generate nutrition"
-    - "Suggestions - Get history"
-    - "Suggestions - Delete suggestion"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -360,3 +352,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Backend completo implementado com FastAPI + MongoDB + JWT auth + Gemini AI integration. Todos os endpoints criados. Frontend com novo sistema de auth (removido Supabase), páginas de login/registro completas e dashboard com 3 abas. Pronto para testar backend."
+  - agent: "testing"
+    message: "🎉 BACKEND TESTING COMPLETE - ALL ENDPOINTS WORKING! Fixed bcrypt password hashing issue (switched to pbkdf2_sha256). All 9 backend endpoints tested successfully: Auth (register/login), Profile (get/update/delete), Suggestions (generate workout/nutrition, get history, delete). Gemini AI integration working for workout generation. Security tests passed (proper JWT validation, unauthorized access rejection). 100% success rate on 13 comprehensive tests."
