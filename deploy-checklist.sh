@@ -57,11 +57,11 @@ else
     check 1 "vercel.json não encontrado em frontend/"
 fi
 
-# 5. Check if there's NO vercel.json in root (should be removed)
-if [ ! -f "vercel.json" ]; then
-    check 0 "vercel.json não existe na raiz (correto)"
+# 5. Check if vercel.json exists in root with correct buildCommand
+if [ -f "vercel.json" ] && grep -q "cd frontend" vercel.json; then
+    check 0 "vercel.json na raiz com buildCommand correto"
 else
-    check 1 "vercel.json existe na raiz (deve ser removido)"
+    check 1 "vercel.json na raiz precisa ter 'cd frontend' no buildCommand"
 fi
 
 # 6. Check if .env.example exists
