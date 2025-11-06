@@ -327,11 +327,11 @@ frontend:
   
   - task: "Dashboard - Tab Histórico"
     implemented: true
-    working: "NA"
+    working: true
     file: "pages/DashboardNew.tsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -339,6 +339,9 @@ frontend:
       - working: "NA"
         agent: "testing"
         comment: "⚠️ NOT TESTED: Could not access dashboard due to registration form submission issue."
+      - working: true
+        agent: "testing"
+        comment: "✅ HISTÓRICO TAB WORKING: Tab navigation functional, can switch between tabs successfully. Histórico tab accessible and renders properly. Ready to display workout and nutrition history when AI suggestions are generated."
   
   - task: "Dashboard - Tab Perfil"
     implemented: true
