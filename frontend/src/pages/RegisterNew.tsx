@@ -63,6 +63,11 @@ const RegisterNew = () => {
       newErrors.objectives = "Por favor, descreva seus objetivos";
     }
     
+    // Training type validation
+    if (!formData.training_type) {
+      newErrors.training_type = "Por favor, selecione onde você pretende treinar";
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
