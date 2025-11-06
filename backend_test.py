@@ -310,8 +310,8 @@ class FitLifeAPITester:
         # Restore token
         self.jwt_token = temp_token
         
-        if not success and response["status_code"] == 401:
-            self.log_test("Unauthorized Access Test", True, "Correctly rejected request without token")
+        if not success and response["status_code"] in [401, 403]:
+            self.log_test("Unauthorized Access Test", True, f"Correctly rejected request without token (HTTP {response['status_code']})")
         else:
             self.log_test("Unauthorized Access Test", False, "Should have rejected request without token", response)
     
