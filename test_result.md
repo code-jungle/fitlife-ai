@@ -107,111 +107,138 @@ user_problem_statement: "FitLife AI - App de fitness com cadastro completo, dash
 backend:
   - task: "Auth System - Register endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint POST /api/auth/register implementado com criação de usuário e perfil completo. Retorna JWT token."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Registration endpoint working correctly. Creates user with complete profile (name, email, age, weight, height, objectives, training_type, dietary_restrictions, current_activities). Returns valid JWT token. Fixed bcrypt password hashing issue by switching to pbkdf2_sha256."
   
   - task: "Auth System - Login endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint POST /api/auth/login implementado com verificação de senha e JWT token."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Login endpoint working correctly. Validates email/password and returns JWT token. Properly rejects invalid credentials with 401 status."
   
   - task: "Profile - Get profile endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint GET /api/profile implementado com cálculo de IMC e categoria."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Profile endpoint working correctly. Returns complete profile with BMI calculation (24.1) and category (Peso normal). Requires JWT authentication."
   
   - task: "Profile - Update profile endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint PUT /api/profile implementado para atualizar dados do perfil."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Profile update endpoint working correctly. Successfully updates profile fields (weight, objectives, current_activities). Returns updated profile with recalculated BMI."
   
   - task: "Profile - Delete account endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint DELETE /api/user implementado para deletar conta e todos os dados associados."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Account deletion endpoint working correctly. Deletes user account and all associated data (profile, suggestions). Returns 204 status."
   
   - task: "Suggestions - Generate workout"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py, gemini_service.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint POST /api/suggestions/workout implementado com Gemini AI. Prompts personalizados baseados em perfil, local de treino e atividades atuais."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Workout generation endpoint working correctly. Generates AI-powered workout plans using Gemini (6894 chars). Personalized based on user profile, training location, and current activities. Returns suggestion with unique ID."
   
   - task: "Suggestions - Generate nutrition"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py, gemini_service.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint POST /api/suggestions/nutrition implementado com Gemini AI. Foco em alimentos baratos e acessíveis."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Nutrition generation endpoint working correctly. Generates nutrition plans (7535 chars). Has fallback mechanism when AI fails. Returns suggestion with unique ID."
   
   - task: "Suggestions - Get history"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint GET /api/suggestions/history implementado retornando workouts e nutrition separados."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Suggestions history endpoint working correctly. Returns separated workouts and nutrition arrays. Properly filters by user ownership."
   
   - task: "Suggestions - Delete suggestion"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint DELETE /api/suggestions/{id} implementado com verificação de ownership."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Suggestion deletion endpoint working correctly. Deletes specific suggestions by ID with ownership verification. Returns 204 status on success."
 
 frontend:
   - task: "Auth Context with JWT"
