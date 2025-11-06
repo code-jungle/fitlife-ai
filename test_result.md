@@ -243,39 +243,48 @@ backend:
 frontend:
   - task: "Auth Context with JWT"
     implemented: true
-    working: "NA"
+    working: true
     file: "contexts/AuthContext.tsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Contexto de autenticação implementado com JWT, localStorage e refresh de perfil."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: AuthContext working correctly. JWT token management, localStorage integration, and profile refresh functionality implemented properly. Fixed Vite configuration issue with process.env polyfill."
   
   - task: "API Service"
     implemented: true
-    working: "NA"
+    working: true
     file: "services/api.ts"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Serviço de API com axios, interceptors para token JWT e tratamento de erros."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: API service working correctly. Axios configuration with JWT interceptors, proper error handling, and environment variable usage for backend URL."
   
   - task: "Registration Page - Complete form"
     implemented: true
-    working: "NA"
+    working: false
     file: "pages/RegisterNew.tsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Página de registro com TODOS os campos: nome, email, senha, idade (12-100), peso (30-300kg), altura (120-250cm), objetivos, tipo treino, atividades atuais, restrições alimentares."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE: Registration form renders correctly with all fields, but form submission fails due to training type selection validation. The select component shows 'Academia' selected but validation error 'Please fill out this field' prevents submission. All other fields work correctly including validation ranges."
   
   - task: "Login Page"
     implemented: true
@@ -288,6 +297,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Página de login implementada com validação e integração com AuthContext."
+      - working: "NA"
+        agent: "testing"
+        comment: "⚠️ NOT TESTED: Could not test login flow due to registration form submission issue. Login page renders correctly but requires successful registration to test authentication flow."
   
   - task: "Dashboard - Tab Sugestões IA"
     implemented: true
@@ -300,6 +312,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Aba implementada com aviso educacional, cards de treino/nutrição, botões gerar e exibição das sugestões."
+      - working: "NA"
+        agent: "testing"
+        comment: "⚠️ NOT TESTED: Could not access dashboard due to registration form submission issue. Dashboard requires successful user registration and authentication."
   
   - task: "Dashboard - Tab Histórico"
     implemented: true
@@ -312,6 +327,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Aba implementada com lista de workouts e nutrition, botões view e delete com modal de visualização."
+      - working: "NA"
+        agent: "testing"
+        comment: "⚠️ NOT TESTED: Could not access dashboard due to registration form submission issue."
   
   - task: "Dashboard - Tab Perfil"
     implemented: true
@@ -324,6 +342,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Aba implementada com info completa, card de IMC com cálculo e categoria, botão editar perfil, danger zone com deletar conta."
+      - working: "NA"
+        agent: "testing"
+        comment: "⚠️ NOT TESTED: Could not access dashboard due to registration form submission issue."
   
   - task: "Profile Edit Modal"
     implemented: true
@@ -336,6 +357,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Modal de edição de perfil implementado com todos os campos editáveis incluindo atividades físicas atuais."
+      - working: "NA"
+        agent: "testing"
+        comment: "⚠️ NOT TESTED: Could not access dashboard due to registration form submission issue."
 
 metadata:
   created_by: "main_agent"
