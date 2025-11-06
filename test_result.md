@@ -344,9 +344,17 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus: 
+    - "Registration Page - Complete form"
+    - "Login Page"
+    - "Dashboard - Tab Sugestões IA"
+    - "Dashboard - Tab Histórico"
+    - "Dashboard - Tab Perfil"
+    - "Profile Edit Modal"
+    - "Auth Context with JWT"
+    - "API Service"
   stuck_tasks: []
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 agent_communication:
