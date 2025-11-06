@@ -62,11 +62,11 @@ export const useErrorHandler = () => {
     };
   }, []);
 
-  const handleAsyncError = useCallback(async <T>(
-    asyncFn: () => Promise<T>,
+  const handleAsyncError = useCallback(async (
+    asyncFn: () => Promise<any>,
     context: string,
     options: ErrorHandlerOptions = {}
-  ): Promise<T | null> => {
+  ) => {
     try {
       return await asyncFn();
     } catch (error) {
