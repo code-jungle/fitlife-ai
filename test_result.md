@@ -309,11 +309,11 @@ frontend:
   
   - task: "Dashboard - Tab Sugestões IA"
     implemented: true
-    working: "NA"
+    working: true
     file: "pages/DashboardNew.tsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -321,6 +321,9 @@ frontend:
       - working: "NA"
         agent: "testing"
         comment: "⚠️ NOT TESTED: Could not access dashboard due to registration form submission issue. Dashboard requires successful user registration and authentication."
+      - working: true
+        agent: "testing"
+        comment: "✅ SUGESTÕES IA TAB WORKING: Dashboard loads correctly with personalized greeting 'Olá, Maria Silva Test!'. Educational warning displayed properly. Both 'Gerar Treino' and 'Gerar Dieta' buttons visible and functional. Tab navigation working. UI renders correctly with proper styling and layout."
   
   - task: "Dashboard - Tab Histórico"
     implemented: true
