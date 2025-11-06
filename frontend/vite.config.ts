@@ -6,21 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   build: {
-    outDir: 'build'
-  },
-  server: {
-    port: 3000,
-    host: '0.0.0.0',
-    allowedHosts: true
-  },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  build: {
-    outDir: "dist",
+    outDir: 'build',
     assetsDir: "assets",
     sourcemap: false,
     minify: "esbuild",
@@ -35,6 +21,17 @@ export default defineConfig(({ mode }) => ({
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
         },
       },
+    },
+  },
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+    allowedHosts: true
+  },
+  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   base: "/",
