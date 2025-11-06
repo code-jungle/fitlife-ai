@@ -1,7 +1,7 @@
 import { Dumbbell, ArrowLeft, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface BaseHeaderProps {
   variant?: 'dashboard' | 'standard' | 'fitlife';
