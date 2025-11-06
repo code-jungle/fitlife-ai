@@ -1,7 +1,13 @@
 import os
 import uuid
+from dotenv import load_dotenv
+from pathlib import Path
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from models import Profile
+
+# Load environment variables
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
 
 class GeminiService:
     def __init__(self):
