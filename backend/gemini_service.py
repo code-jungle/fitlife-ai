@@ -375,6 +375,14 @@ Gere um plano completo com alimentos BARATOS e ACESSÍVEIS."""
                     meals=formatted_meals
                 )
                 
+                # Validate for forbidden foods
+                is_valid, forbidden_found = validate_meal_plan(final_nutrition)
+                if not is_valid:
+                    print(f"⚠️ AVISO: Alimentos caros detectados: {forbidden_found}")
+                    print("Gerando plano alternativo com alimentos permitidos...")
+                    # If validation fails, return default plan
+                    return self._get_default_nutrition(profile)
+                
                 return final_nutrition
                 
             except (json.JSONDecodeError, KeyError) as parse_error:
