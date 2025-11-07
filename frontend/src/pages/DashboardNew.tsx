@@ -396,13 +396,13 @@ const DashboardNew = () => {
                                     <Eye className="w-4 h-4" />
                                   </Button>
                                 </DialogTrigger>
-                                <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+                                <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto custom-scrollbar">
                                   <DialogHeader>
-                                    <DialogTitle>Treino</DialogTitle>
+                                    <DialogTitle>Treino Completo</DialogTitle>
                                   </DialogHeader>
-                                  <pre className="whitespace-pre-wrap text-sm">
-                                    {workout.content}
-                                  </pre>
+                                  <div className="mt-4">
+                                    <WorkoutDisplay content={workout.content} />
+                                  </div>
                                 </DialogContent>
                               </Dialog>
                               <Button 
