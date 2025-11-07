@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import WorkoutDisplay from "@/components/WorkoutDisplay";
 import NutritionDisplay from "@/components/NutritionDisplay";
+import PWAInstallButton from "@/components/PWAInstallButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
