@@ -31,7 +31,7 @@ class GeminiService:
     
     async def generate_workout(self, profile: Profile) -> str:
         """
-        Generate personalized workout plan using Gemini
+        Generate personalized workout plan using Gemini with fixed template
         Adapts to training location and current activities
         """
         bmi = self._calculate_bmi(profile.weight, profile.height)
@@ -43,8 +43,7 @@ class GeminiService:
         }.get(profile.training_type, "local escolhido")
         
         system_message = """Você é um personal trainer experiente especializado em criar treinos personalizados.
-Sua missão é criar planos de treino seguros, eficientes e adaptados ao perfil do aluno.
-IMPORTANTE: Siga EXATAMENTE o formato especificado para garantir consistência visual."""
+Você deve retornar APENAS um JSON estruturado com os dados do treino. NÃO adicione texto extra."""
         
         prompt = f"""Crie um plano de treino personalizado com base nas seguintes informações:
 
