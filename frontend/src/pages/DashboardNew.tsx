@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { 
   Sparkles, History, User, Dumbbell, Apple, 
   AlertCircle, Loader2, Trash2, Eye, LogOut,
-  Scale, Ruler, Target, Activity 
+  Scale, Ruler, Target, Activity, Crown 
 } from "lucide-react";
 import WorkoutDisplay from "@/components/WorkoutDisplay";
 import NutritionDisplay from "@/components/NutritionDisplay";
