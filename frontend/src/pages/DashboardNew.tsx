@@ -741,6 +741,208 @@ const DashboardNew = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          {/* TAB 4: PREMIUM */}
+          <TabsContent value="premium" className="space-y-6">
+            {loadingSubscription ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              </div>
+            ) : (
+              <>
+                {/* Premium Status Card */}
+                {subscriptionStatus && (
+                  <Card className="glass-card">
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                          subscriptionStatus.is_premium 
+                            ? 'bg-gradient-primary' 
+                            : 'bg-white/10'
+                        }`}>
+                          <Crown className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <CardTitle>Status da Assinatura</CardTitle>
+                          <CardDescription>
+                            {subscriptionStatus.is_premium 
+                              ? subscriptionStatus.status === 'trial'
+                                ? 'Período de teste ativo'
+                                : 'Assinatura premium ativa'
+                              : 'Período de teste expirado'
+                            }
+                          </CardDescription>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {subscriptionStatus.is_premium ? (
+                        <>
+                          <div className="flex items-center justify-between p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                            <span className="text-foreground font-medium">
+                              ✓ Acesso Premium Ativo
+                            </span>
+                            <span className="text-sm text-green-500 font-semibold">
+                              {subscriptionStatus.days_left} dias restantes
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <p className="text-sm text-muted-foreground">
+                              Você tem acesso a todas as funcionalidades premium:
+                            </p>
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-2 text-sm">
+                                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
+                                  <span className="text-green-500 text-xs">✓</span>
+                                </div>
+                                <span>Treinos ilimitados com IA</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm">
+                                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
+                                  <span className="text-green-500 text-xs">✓</span>
+                                </div>
+                                <span>Dietas personalizadas ilimitadas</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm">
+                                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
+                                  <span className="text-green-500 text-xs">✓</span>
+                                </div>
+                                <span>Histórico completo</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm">
+                                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
+                                  <span className="text-green-500 text-xs">✓</span>
+                                </div>
+                                <span>Suporte prioritário</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {subscriptionStatus.status === 'trial' && (
+                            <Alert className="border-amber-500/20 bg-amber-500/10">
+                              <AlertCircle className="w-4 h-4 text-amber-500" />
+                              <AlertDescription className="text-amber-200">
+                                Seu período de teste grátis termina em {subscriptionStatus.days_left} dias. 
+                                Após isso, você será cobrado automaticamente R$ 14,90/mês.
+                              </AlertDescription>
+                            </Alert>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <Alert className="border-red-500/20 bg-red-500/10">
+                            <AlertCircle className="w-4 h-4 text-red-500" />
+                            <AlertDescription className="text-red-200">
+                              Seu período de teste expirou. Assine agora para continuar gerando treinos e dietas personalizadas.
+                            </AlertDescription>
+                          </Alert>
+                        </>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Pricing Card */}
+                {packages.map((pkg: any) => (
+                  <Card key={pkg.id} className="glass-card border-2 border-primary/30">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <CardTitle className="text-2xl">{pkg.name}</CardTitle>
+                          <CardDescription>
+                            {pkg.trial_days} dias grátis, depois apenas R$ {pkg.amount.toFixed(2)}/mês
+                          </CardDescription>
+                        </div>
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold">
+                          <Crown className="w-3 h-3" />
+                          Mais Popular
+                        </span>
+                      </div>
+                    </CardHeader>
+
+                    <CardContent className="space-y-6">
+                      {/* Price */}
+                      <div className="text-center py-6 bg-white/5 rounded-lg">
+                        <div className="flex items-baseline justify-center gap-2">
+                          <span className="text-5xl font-bold gradient-text">
+                            R$ {pkg.amount.toFixed(2)}
+                          </span>
+                          <span className="text-xl text-muted-foreground">/mês</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground mt-2">
+                          Primeiros {pkg.trial_days} dias grátis
+                        </p>
+                      </div>
+
+                      {/* Features */}
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-green-500 text-sm">✓</span>
+                          </div>
+                          <span className="text-foreground">Treinos ilimitados com IA</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-green-500 text-sm">✓</span>
+                          </div>
+                          <span className="text-foreground">Dietas personalizadas ilimitadas</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-green-500 text-sm">✓</span>
+                          </div>
+                          <span className="text-foreground">Histórico completo</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-green-500 text-sm">✓</span>
+                          </div>
+                          <span className="text-foreground">Planos adaptados ao seu objetivo</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-green-500 text-sm">✓</span>
+                          </div>
+                          <span className="text-foreground">Suporte prioritário</span>
+                        </div>
+                      </div>
+
+                      {/* CTA Button */}
+                      <Button
+                        className="w-full btn-primary text-lg py-6"
+                        onClick={() => navigate('/upgrade')}
+                        disabled={subscriptionStatus?.is_premium && subscriptionStatus?.status === 'active'}
+                      >
+                        {subscriptionStatus?.is_premium && subscriptionStatus?.status === 'active' ? (
+                          "Você já é Premium!"
+                        ) : subscriptionStatus?.status === 'trial' ? (
+                          <>
+                            <Crown className="w-5 h-5 mr-2" />
+                            Assinar Agora
+                          </>
+                        ) : (
+                          <>
+                            <Crown className="w-5 h-5 mr-2" />
+                            Começar Período Grátis
+                          </>
+                        )}
+                      </Button>
+
+                      {/* Trust info */}
+                      <div className="pt-4 border-t border-white/10">
+                        <p className="text-xs text-center text-muted-foreground">
+                          🔒 Pagamento seguro via Stripe<br />
+                          ✓ Cancele quando quiser • Sem compromisso
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </>
+            )}
+          </TabsContent>
         </Tabs>
       </main>
     </div>
