@@ -143,7 +143,12 @@ LEMBRE-SE: Alongamentos devem ter instruções detalhadas de execução!"""
                     # Format cooldown
                     cooldown_text = ""
                     for i, stretch in enumerate(day.get('cooldown', []), 1):
-                        cooldown_text += format_cooldown_item(i, stretch['muscle'], stretch['duration'])
+                        cooldown_text += format_cooldown_item(
+                            i, 
+                            stretch['muscle'], 
+                            stretch['duration'],
+                            stretch.get('instructions', '')
+                        )
                     
                     formatted_days.append({
                         'title': day['title'],
