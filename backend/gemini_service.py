@@ -501,43 +501,125 @@ OBSERVAÇÕES DE SEGURANÇA
 - Mantenha uma alimentação adequada para seus objetivos"""
     
     def _get_default_nutrition(self, profile: Profile) -> str:
-        """Fallback nutrition plan"""
-        return f"""**PLANO NUTRICIONAL - {profile.full_name}**
+        """Fallback nutrition plan with cheap and accessible foods"""
+        return f"""PLANO NUTRICIONAL PERSONALIZADO - {profile.full_name.upper()}
 
-⚠️ Este é um plano básico gerado automaticamente. Para melhores resultados, complete seu perfil.
+METAS DIÁRIAS
+Calorias totais: 2000 kcal
+Proteínas: 130g
+Carboidratos: 220g
+Gorduras: 55g
 
-**CARDÁPIO DIÁRIO**
+CAFÉ DA MANHÃ
+1. Ovos mexidos - 2 unidades
+   Fonte de proteína de alta qualidade e baixo custo
+2. Pão francês - 2 unidades
+   Carboidrato de energia rápida
+3. Banana - 1 unidade média
+   Rica em potássio e fibras
+4. Café com leite - 1 xícara
 
-**Café da Manhã:**
-- 2 ovos mexidos
-- 2 fatias de pão integral
-- 1 banana
-- Café com leite
+Total aproximado: 420 kcal
 
-**Lanche da Manhã:**
-- 1 iogurte natural
-- 1 maçã
+LANCHE DA MANHÃ
+1. Iogurte natural - 1 copo (200ml)
+   Probióticos para saúde intestinal
+2. Aveia em flocos - 2 colheres de sopa
+   Fibras e saciedade
 
-**Almoço:**
-- Arroz integral (4 colheres)
-- Feijão (1 concha)
-- Frango grelhado (150g)
-- Salada verde à vontade
-- 1 colher de azeite
+Total aproximado: 180 kcal
 
-**Lanche da Tarde:**
-- Pão integral com pasta de amendoim
-- 1 fruta da estação
+ALMOÇO
+1. Arroz branco - 5 colheres de sopa
+   Base energética da refeição
+2. Feijão carioca - 1 concha média
+   Proteína vegetal e ferro
+3. Frango (coxa ou sobrecoxa) - 150g
+   Proteína acessível e saborosa
+4. Salada de alface e tomate - à vontade
+   Vitaminas e minerais
+5. Óleo de soja - 1 colher de sopa
+   Gordura para cozimento
 
-**Jantar:**
-- Omelete de 3 ovos com legumes
-- Salada verde
-- 1 fatia de pão integral
+Total aproximado: 650 kcal
 
-**Ceia (opcional):**
-- 1 copo de leite desnatado
+LANCHE DA TARDE
+1. Pão de forma - 2 fatias
+   Praticidade e energia
+2. Requeijão - 1 colher de sopa
+   Gordura e sabor
+3. Mamão - 1 fatia média
+   Digestão e vitaminas
 
-💡 **Dica:** Beba pelo menos 2 litros de água por dia."""
+Total aproximado: 220 kcal
+
+JANTAR
+1. Macarrão - 1 pegador médio
+   Carboidrato de fácil preparo
+2. Carne moída - 100g
+   Proteína econômica
+3. Molho de tomate caseiro - à vontade
+   Tempero natural
+4. Cenoura ralada - 2 colheres de sopa
+   Vitamina A e cor
+
+Total aproximado: 480 kcal
+
+CEIA
+1. Leite integral - 1 copo (200ml)
+   Cálcio e proteína antes de dormir
+
+Total aproximado: 120 kcal
+
+LISTA DE COMPRAS SEMANAL
+- Ovos (30 unidades) - Preço aproximado: R$ 18,00
+- Frango (coxa/sobrecoxa 2kg) - Preço aproximado: R$ 20,00
+- Carne moída (1kg) - Preço aproximado: R$ 18,00
+- Arroz (5kg) - Preço aproximado: R$ 20,00
+- Feijão (1kg) - Preço aproximado: R$ 8,00
+- Macarrão (1kg) - Preço aproximado: R$ 5,00
+- Pão francês (14 unidades) - Preço aproximado: R$ 10,00
+- Pão de forma (1 pacote) - Preço aproximado: R$ 6,00
+- Leite (3L) - Preço aproximado: R$ 15,00
+- Iogurte natural (1L) - Preço aproximado: R$ 8,00
+- Aveia (500g) - Preço aproximado: R$ 5,00
+- Banana (1 dúzia) - Preço aproximado: R$ 6,00
+- Mamão (1 unidade) - Preço aproximado: R$ 5,00
+- Alface (2 pés) - Preço aproximado: R$ 4,00
+- Tomate (1kg) - Preço aproximado: R$ 6,00
+- Cenoura (500g) - Preço aproximado: R$ 3,00
+- Óleo de soja (900ml) - Preço aproximado: R$ 7,00
+- Requeijão (200g) - Preço aproximado: R$ 6,00
+
+Total estimado da semana: R$ 140,00
+
+DICAS DE PREPARO
+- Prepare as refeições com antecedência nos finais de semana
+- Use temperos naturais (alho, cebola, cheiro verde) para dar mais sabor
+- Cozinhe em maior quantidade e congele porções
+- Prefira alimentos grelhados, assados ou cozidos
+- Lave bem frutas e verduras antes de consumir
+
+DICAS DE ECONOMIA
+- Compre frutas e verduras da estação (mais baratas)
+- Escolha coxa/sobrecoxa de frango ao invés de peito
+- Compre ovos em caixas de 30 unidades (mais barato)
+- Prefira pão francês ao invés de pães especiais
+- Faça uma lista antes de ir ao mercado e evite compras por impulso
+
+SUBSTITUIÇÕES POSSÍVEIS
+- Frango pode ser substituído por Carne de segunda (patinho, músculo)
+- Banana pode ser substituída por Laranja ou Maçã
+- Mamão pode ser substituído por Melancia
+- Iogurte natural pode ser substituído por Leite com aveia
+- Requeijão pode ser substituído por Queijo minas
+
+OBSERVAÇÕES IMPORTANTES
+- Beba pelo menos 2 litros de água por dia
+- Evite alimentos ultraprocessados e fast food
+- Mastigue bem os alimentos para melhor digestão
+- Faça as refeições em horários regulares
+- Consulte um nutricionista para orientações específicas e personalizadas"""
 
 # Create singleton instance
 gemini_service = GeminiService()
