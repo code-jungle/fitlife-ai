@@ -97,6 +97,31 @@ class ApiService {
     await this.client.delete(`/api/suggestions/${suggestionId}`);
   }
 
+  // ==================== PAYMENTS ====================
+
+  async createCheckoutSession(packageId: string, originUrl: string): Promise<{ url: string; session_id: string }> {
+    const response = await this.client.post('/api/payments/checkout', {
+      package_id: packageId,
+      origin_url: originUrl
+    });
+    return response.data;
+  }
+
+  async getCheckoutStatus(sessionId: string): Promise<any> {
+    const response = await this.client.get(`/api/payments/checkout/status/${sessionId}`);
+    return response.data;
+  }
+
+  async getSubscriptionStatus(): Promise<any> {
+    const response = await this.client.get('/api/subscription/status');
+    return response.data;
+  }
+
+  async getSubscriptionPackages(): Promise<{ packages: any[] }> {
+    const response = await this.client.get('/api/subscription/packages');
+    return response.data;
+  }
+
   // ==================== HEALTH ====================
 
   async healthCheck(): Promise<{ status: string; timestamp: string }> {
