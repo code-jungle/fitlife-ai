@@ -62,6 +62,9 @@ const AppRoutes = () => {
       <Route path="/login" element={<RedirectIfLoggedIn><LoginNew /></RedirectIfLoggedIn>} />
       <Route path="/register" element={<RedirectIfLoggedIn><RegisterNew /></RedirectIfLoggedIn>} />
       <Route path="/dashboard" element={<ProtectedRoute><DashboardNew /></ProtectedRoute>} />
+      <Route path="/upgrade" element={<ProtectedRoute><UpgradePremium /></ProtectedRoute>} />
+      <Route path="/payment-success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
+      <Route path="/payment-cancel" element={<ProtectedRoute><PaymentCancel /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
