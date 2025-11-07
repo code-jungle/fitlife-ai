@@ -13,6 +13,12 @@ from templates import (
     format_warmup_item,
     format_cooldown_item
 )
+from food_lists import (
+    get_allowed_foods_text,
+    get_forbidden_foods_text,
+    validate_meal_plan,
+    ALIMENTOS_PERMITIDOS
+)
 
 # Load environment variables
 ROOT_DIR = Path(__file__).parent
