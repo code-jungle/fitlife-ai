@@ -43,11 +43,23 @@ const DashboardNew = () => {
   const [deleteAccountOpen, setDeleteAccountOpen] = useState(false);
   const [profileFormData, setProfileFormData] = useState<ProfileUpdate>({});
   const [savingProfile, setSavingProfile] = useState(false);
+  
+  // Premium state
+  const [subscriptionStatus, setSubscriptionStatus] = useState<any>(null);
+  const [loadingSubscription, setLoadingSubscription] = useState(false);
+  const [packages, setPackages] = useState<any[]>([]);
 
   // Load history when switching to history tab
   useEffect(() => {
     if (activeTab === "history") {
       loadHistory();
+    }
+  }, [activeTab]);
+  
+  // Load subscription status when switching to premium tab
+  useEffect(() => {
+    if (activeTab === "premium") {
+      loadSubscriptionData();
     }
   }, [activeTab]);
 
