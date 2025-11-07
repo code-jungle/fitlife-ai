@@ -79,22 +79,37 @@ const NutritionDisplay: React.FC<NutritionDisplayProps> = ({ content }) => {
 
       // Food items (numbered or with bullet points)
       if (trimmedLine.match(/^\d+\./) || trimmedLine.match(/^[-•]/)) {
-        const foodName = trimmedLine.split(':')[0].replace(/^\d+\./, '').replace(/^[-•]/, '').trim();
-        const details = trimmedLine.split(':').slice(1).join(':').trim();
+        const hasDetails = trimmedLine.includes(':') || trimmedLine.includes('-');
         
-        formattedLines.push(
-          <div key={lineKey++} className="ml-4 mb-3 p-3 rounded-lg bg-white/5 border border-white/10 hover:border-green-500/30 transition-colors">
-            <div className="flex items-start gap-2">
-              <Utensils className="w-4 h-4 text-green-500 mt-1 flex-shrink-0" />
-              <div className="flex-1">
-                <p className="font-semibold text-foreground">{foodName}</p>
-                {details && (
-                  <p className="text-sm text-muted-foreground mt-1">{details}</p>
-                )}
+        if (hasDetails) {
+          const parts = trimmedLine.split(/[:-]/);
+          const foodName = parts[0].replace(/^\d+\./, '').replace(/^[-•]/, '').trim();
+          const details = parts.slice(1).join(' ').trim();
+          
+          formattedLines.push(
+            <div key={lineKey++} className="ml-4 mb-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:border-green-500/30 transition-colors">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                  <Utensils className="w-4 h-4 text-green-500" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-foreground text-base mb-1">{foodName}</p>
+                  {details && (
+                    <p className="text-sm text-muted-foreground leading-relaxed">{details}</p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        );
+          );
+        } else {
+          const foodName = trimmedLine.replace(/^\d+\./, '').replace(/^[-•]/, '').trim();
+          formattedLines.push(
+            <div key={lineKey++} className="ml-4 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <span className="text-foreground">{foodName}</span>
+            </div>
+          );
+        }
         return;
       }
 
