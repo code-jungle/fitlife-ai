@@ -47,16 +47,17 @@ const WorkoutDisplay: React.FC<WorkoutDisplayProps> = ({ content }) => {
       }
 
       // Section headers (DIA A, DIA B, AQUECIMENTO, etc)
-      if (trimmedLine.match(/^(DIA [A-Z]|AQUECIMENTO|TREINO|ALONGAMENTO|FREQUÊNCIA)/i)) {
-        const emoji = trimmedLine.includes('AQUECIMENTO') ? '🔥' :
-                     trimmedLine.includes('ALONGAMENTO') ? '🧘' :
-                     trimmedLine.includes('TREINO') ? '💪' : '📅';
+      if (trimmedLine.match(/^(DIA [A-Z]|AQUECIMENTO|TREINO|ALONGAMENTO|FREQUÊNCIA|EXERCÍCIO)/i)) {
+        const emoji = trimmedLine.match(/AQUECIMENTO/i) ? '🔥' :
+                     trimmedLine.match(/ALONGAMENTO/i) ? '🧘' :
+                     trimmedLine.match(/TREINO/i) ? '💪' :
+                     trimmedLine.match(/EXERCÍCIO/i) ? '🏋️' : '📅';
         
         formattedLines.push(
           <div key={lineKey++} className="flex items-center gap-2 mt-5 mb-2 p-3 rounded-lg bg-gradient-primary/10 border border-primary/20">
             <span className="text-2xl">{emoji}</span>
             <h4 className="text-lg font-semibold text-foreground">
-              {trimmedLine.replace(/\*\*/g, '')}
+              {trimmedLine}
             </h4>
           </div>
         );
