@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste API URL - FitLife AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0a0a0a;
+            color: white;
+        }
+        .result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .success { background: #1a4d2e; border: 1px solid #2ecc71; }
+        .error { background: #4d1a1a; border: 1px solid #e74c3c; }
+        .info { background: #1a3a4d; border: 1px solid #3498db; }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Conexão API - FitLife AI</h1>
+    
+    <div class="info result">
+        <strong>URL Esperada:</strong><br>
+        https://smart-workout-38.preview.emergentagent.com
+    </div>
+    
+    <div id="current-url" class="info result">
+        <strong>URL Atual do Frontend:</strong><br>
+        <span id="url-value">Carregando...</span>
+    </div>
+    
+    <button onclick="testarHealth()">Testar Health Endpoint</button>
+    <button onclick="testarRegistro()">Testar Registro (Mock)</button>
+    
+    <div id="results"></div>
+
+    <script>
+        // Simular leitura da variável de ambiente do Vite
+        const BACKEND_URL = 'https://smart-workout-38.preview.emergentagent.com';
+        
+        document.getElementById('url-value').textContent = BACKEND_URL;
+        
+        function addResult(message, type) {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = message;
+            document.getElementById('results').appendChild(div);
+        }
+        
+        async function testarHealth() {
+            document.getElementById('results').innerHTML = '';
+            addResult('🔄 Testando health endpoint...', 'info');
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/health`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    addResult(`✅ Health OK!<br>Status: ${data.status}<br>Timestamp: ${data.timestamp}`, 'success');
+                } else {
+                    addResult(`❌ Health falhou!<br>Status: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Erro: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testarRegistro() {
+            document.getElementById('results').innerHTML = '';
+            addResult('🔄 Testando endpoint de registro...', 'info');
+            
+            const mockData = {
+                email: `teste${Date.now()}@fitlife.com`,
+                password: 'senha12345',
+                full_name: 'Usuario Teste',
+                age: 25,
+                weight: 70.5,
+                height: 175,
+                objectives: 'Teste',
+                dietary_restrictions: 'Nenhuma',
+                training_type: 'academia',
+                current_activities: 'Teste'
+            };
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mockData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    addResult(`✅ Registro OK!<br>Token recebido: ${data.access_token.substring(0, 50)}...`, 'success');
+                } else {
+                    addResult(`❌ Registro falhou!<br>Status: ${response.status}<br>Erro: ${JSON.stringify(data)}`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Erro: ${error.message}`, 'error');
+            }
+        }
+        
+        // Testar automaticamente ao carregar
+        testarHealth();
+    </script>
+</body>
+</html>
