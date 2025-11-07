@@ -415,6 +415,168 @@ async def delete_suggestion(
     
     logger.info(f"Sugestão deletada: {suggestion_id} por {current_user_email}")
 
+# ==================== PAYMENT ENDPOINTS ====================
+
+@api_router.post("/payments/checkout")
+async def create_checkout(
+    checkout_data: CheckoutRequest,
+    request: Request,
+    current_user_email: str = Depends(get_current_user_email)
+):
+    """Create Stripe checkout session for subscription"""
+    db = get_database()
+    
+    # Get user
+    user_doc = await db.users.find_one({"email": current_user_email})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    
+    # Build webhook URL
+    host_url = str(request.base_url).rstrip('/')
+    webhook_url = f"{host_url}/api/webhook/stripe"
+    
+    # Initialize Stripe
+    stripe_checkout = payment_service.get_stripe_checkout(webhook_url)
+    
+    # Create checkout session
+    session = await payment_service.create_checkout_session(
+        stripe_checkout=stripe_checkout,
+        user_id=user_doc["id"],
+        user_email=user_doc["email"],
+        package_id=checkout_data.package_id,
+        origin_url=checkout_data.origin_url
+    )
+    
+    # Create payment transaction record
+    package = payment_service.get_package_details(checkout_data.package_id)
+    transaction = PaymentTransaction(
+        user_id=user_doc["id"],
+        user_email=user_doc["email"],
+        session_id=session.session_id,
+        amount=package["amount"],
+        currency=package["currency"],
+        payment_status="pending",
+        metadata={
+            "package_id": checkout_data.package_id,
+            "package_name": package["name"]
+        }
+    )
+    
+    await db.payment_transactions.insert_one(transaction.model_dump())
+    
+    logger.info(f"Checkout session created: {session.session_id} for user {current_user_email}")
+    
+    return {
+        "url": session.url,
+        "session_id": session.session_id
+    }
+
+@api_router.get("/payments/checkout/status/{session_id}")
+async def get_checkout_status(
+    session_id: str,
+    request: Request,
+    current_user_email: str = Depends(get_current_user_email)
+):
+    """Get checkout session status and process payment if successful"""
+    db = get_database()
+    
+    # Build webhook URL
+    host_url = str(request.base_url).rstrip('/')
+    webhook_url = f"{host_url}/api/webhook/stripe"
+    
+    # Initialize Stripe
+    stripe_checkout = payment_service.get_stripe_checkout(webhook_url)
+    
+    # Get status from Stripe
+    status = await stripe_checkout.get_checkout_status(session_id)
+    
+    # Get transaction
+    transaction = await db.payment_transactions.find_one({"session_id": session_id})
+    if not transaction:
+        raise HTTPException(status_code=404, detail="Transação não encontrada")
+    
+    # Process payment if successful and not already processed
+    if status.payment_status == "paid":
+        await payment_service.process_successful_payment(
+            db=db,
+            session_id=session_id,
+            payment_status="paid",
+            metadata=transaction.get("metadata", {})
+        )
+    
+    return {
+        "status": status.status,
+        "payment_status": status.payment_status,
+        "amount_total": status.amount_total,
+        "currency": status.currency
+    }
+
+@api_router.post("/webhook/stripe")
+async def stripe_webhook(request: Request):
+    """Handle Stripe webhooks"""
+    db = get_database()
+    
+    # Build webhook URL
+    host_url = str(request.base_url).rstrip('/')
+    webhook_url = f"{host_url}/api/webhook/stripe"
+    
+    # Initialize Stripe
+    stripe_checkout = payment_service.get_stripe_checkout(webhook_url)
+    
+    # Get request body and signature
+    body = await request.body()
+    signature = request.headers.get("Stripe-Signature")
+    
+    try:
+        # Handle webhook
+        webhook_response = await stripe_checkout.handle_webhook(body, signature)
+        
+        logger.info(f"Webhook received: {webhook_response.event_type} - {webhook_response.session_id}")
+        
+        # Process payment if successful
+        if webhook_response.payment_status == "paid":
+            await payment_service.process_successful_payment(
+                db=db,
+                session_id=webhook_response.session_id,
+                payment_status=webhook_response.payment_status,
+                metadata=webhook_response.metadata
+            )
+        
+        return {"status": "success"}
+    except Exception as e:
+        logger.error(f"Webhook error: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.get("/subscription/status")
+async def get_subscription_status(current_user_email: str = Depends(get_current_user_email)):
+    """Get user's subscription status"""
+    db = get_database()
+    
+    # Get user
+    user_doc = await db.users.find_one({"email": current_user_email})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    
+    status = payment_service.get_subscription_status(user_doc["id"], db)
+    
+    return status
+
+@api_router.get("/subscription/packages")
+async def get_subscription_packages():
+    """Get available subscription packages"""
+    return {
+        "packages": [
+            {
+                "id": package_id,
+                "name": details["name"],
+                "amount": details["amount"],
+                "currency": details["currency"],
+                "trial_days": details["trial_days"]
+            }
+            for package_id, details in SUBSCRIPTION_PACKAGES.items()
+        ]
+    }
+
 # ==================== HEALTH CHECK ====================
 
 @api_router.get("/health")
