@@ -131,3 +131,29 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+# ==================== SUBSCRIPTION MODELS ====================
+
+class SubscriptionStatus(BaseModel):
+    user_id: str
+    is_premium: bool
+    trial_ends_at: Optional[datetime] = None
+    subscription_ends_at: Optional[datetime] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PaymentTransaction(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    user_email: str
+    session_id: str
+    amount: float
+    currency: str = "brl"
+    payment_status: str = "pending"  # pending, paid, failed, expired
+    stripe_price_id: Optional[str] = None
+    metadata: Optional[dict] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class CheckoutRequest(BaseModel):
+    package_id: str  # "monthly_subscription"
+    origin_url: str  # Frontend origin for success/cancel URLs
