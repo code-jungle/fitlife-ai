@@ -34,38 +34,81 @@ class GeminiService:
         }.get(profile.training_type, "local escolhido")
         
         system_message = """Você é um personal trainer experiente especializado em criar treinos personalizados.
-Sua missão é criar planos de treino seguros, eficientes e adaptados ao perfil do aluno."""
+Sua missão é criar planos de treino seguros, eficientes e adaptados ao perfil do aluno.
+IMPORTANTE: Siga EXATAMENTE o formato especificado para garantir consistência visual."""
         
         prompt = f"""Crie um plano de treino personalizado com base nas seguintes informações:
 
-**PERFIL DO ALUNO:**
-- Nome: {profile.full_name}
-- Idade: {profile.age} anos
-- Peso: {profile.weight} kg
-- Altura: {profile.height} cm
-- IMC: {bmi}
-- Local de treino: {training_location}
-- Objetivos: {profile.objectives}
-- Atividades físicas atuais: {profile.current_activities or "Nenhuma atividade regular"}
-- Restrições: {profile.dietary_restrictions or "Nenhuma restrição mencionada"}
+PERFIL DO ALUNO
+Nome: {profile.full_name}
+Idade: {profile.age} anos
+Peso: {profile.weight} kg
+Altura: {profile.height} cm
+IMC: {bmi}
+Local de treino: {training_location}
+Objetivos: {profile.objectives}
+Atividades físicas atuais: {profile.current_activities or "Nenhuma atividade regular"}
 
-**INSTRUÇÕES IMPORTANTES:**
-1. Adapte os exercícios para o local escolhido ({training_location})
-2. Considere as atividades físicas que a pessoa já pratica para evitar sobrecarga
-3. Se a pessoa já faz exercícios, complemente com treinos diferentes para trabalhar outros grupos musculares
-4. Inclua sempre: aquecimento (5-10 min), treino principal (30-45 min), alongamento (5-10 min)
-5. Para cada exercício, especifique: séries, repetições e tempo de descanso
-6. Dê dicas de progressão e variações dos exercícios
-7. Inclua avisos de segurança quando necessário
+INSTRUÇÕES
+1. Adapte os exercícios para {training_location}
+2. Considere as atividades físicas atuais para evitar sobrecarga
+3. Se já pratica exercícios, complemente com outros grupos musculares
+4. Inclua sempre: aquecimento, treino principal e alongamento
+5. Para cada exercício: séries, repetições e descanso
 
-**FORMATO DA RESPOSTA:**
-Retorne um plano estruturado com:
-- Frequência semanal recomendada
-- Divisão de treino (ex: ABC, upper/lower, etc)
-- Exercícios detalhados para cada dia
-- Orientações importantes
+FORMATO OBRIGATÓRIO - SIGA EXATAMENTE ESTA ESTRUTURA:
 
-Seja motivador e educativo! Este é um plano educacional."""
+PLANO DE TREINO - {profile.full_name.upper()}
+
+FREQUÊNCIA
+3 a 4 vezes por semana com 1 dia de descanso entre treinos
+
+DIVISÃO
+[Especifique a divisão: ABC, Upper/Lower, Full Body, etc]
+
+DIA A - [NOME DO GRUPO MUSCULAR]
+
+AQUECIMENTO
+1. [Exercício] - [tempo/repetições]
+2. [Exercício] - [tempo/repetições]
+
+TREINO PRINCIPAL
+1. [Nome do exercício]
+   Séries: [número], Repetições: [número], Descanso: [tempo]
+
+2. [Nome do exercício]
+   Séries: [número], Repetições: [número], Descanso: [tempo]
+
+3. [Nome do exercício]
+   Séries: [número], Repetições: [número], Descanso: [tempo]
+
+ALONGAMENTO
+1. [Músculo] - [tempo]
+2. [Músculo] - [tempo]
+
+[Repita a estrutura para outros dias se necessário]
+
+DICAS IMPORTANTES
+- [Dica 1]
+- [Dica 2]
+- [Dica 3]
+
+PROGRESSÃO
+[Orientações de como progredir ao longo das semanas]
+
+OBSERVAÇÕES
+[Avisos de segurança e recomendações]
+
+REGRAS DE FORMATAÇÃO:
+- Use MAIÚSCULAS apenas para títulos de seções (DIA A, AQUECIMENTO, etc)
+- Liste exercícios numerados (1., 2., 3.)
+- Coloque séries/repetições em linhas separadas SEMPRE
+- Use travessão (-) para listas de dicas
+- NÃO use asteriscos ou tabelas markdown
+- Mantenha espaçamento consistente
+- Seja claro e direto
+
+Seja motivador e profissional! Este é um plano educacional."""
 
         try:
             # Create a unique session for this request
