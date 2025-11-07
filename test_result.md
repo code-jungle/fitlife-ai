@@ -242,15 +242,18 @@ backend:
   
   - task: "Payment - Create checkout session"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py, payment_service.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint POST /api/payments/checkout implementado com Stripe integration. Cria checkout session com trial de 7 dias + R$14,90/mês. URLs de success e cancel atualizadas para /payment-success e /payment-cancel."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Checkout creation endpoint working correctly. Creates Stripe checkout session with valid session_id and URL. Properly validates package_id (rejects invalid packages with 400). Requires JWT authentication (403 without token). Amount correctly set to 1490 (R$14.90 in cents)."
   
   - task: "Payment - Get checkout status"
     implemented: true
