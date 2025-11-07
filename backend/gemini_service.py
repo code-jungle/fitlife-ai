@@ -255,18 +255,7 @@ REGRAS DE FORMATAÇÃO:
 - Seja claro e direto
 - Foque em alimentos BARATOS e ACESSÍVEIS
 
-Seja prático e realista! Foque em alimentação econômica e nutritiva.
-- Cardápio semanal com 5-6 refeições por dia:
-  * Café da manhã
-  * Lanche da manhã
-  * Almoço
-  * Lanche da tarde
-  * Jantar
-  * Ceia (opcional)
-- Lista de compras com preços aproximados
-- Dicas de economia e preparo
-
-Seja prático e realista! Foque na acessibilidade financeira."""
+Seja prático e realista! Foque em alimentação econômica e nutritiva."""
 
         try:
             # Create a unique session for this request
