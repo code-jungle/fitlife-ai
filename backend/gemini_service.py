@@ -65,57 +65,32 @@ INSTRUÇÕES
 
 RETORNE APENAS ESTE JSON (sem texto extra):
 
-PLANO DE TREINO - {profile.full_name.upper()}
+{{
+  "frequency": "3 a 4 vezes por semana com descanso entre treinos",
+  "division": "Tipo de divisão (ABC, Upper/Lower, Full Body, etc)",
+  "days": [
+    {{
+      "title": "DIA A - NOME DO GRUPO",
+      "warmup": [
+        {{"exercise": "Nome", "duration": "tempo"}},
+        {{"exercise": "Nome", "duration": "tempo"}}
+      ],
+      "main_workout": [
+        {{
+          "name": "Nome do exercício",
+          "sets": 3,
+          "reps": "12",
+          "rest": "60 segundos"
+        }}
+      ],
+      "cooldown": [
+        {{"muscle": "Nome do músculo", "duration": "30 segundos"}}
+      ]
+    }}
+  ]
+}}
 
-FREQUÊNCIA
-3 a 4 vezes por semana com 1 dia de descanso entre treinos
-
-DIVISÃO
-[Especifique a divisão: ABC, Upper/Lower, Full Body, etc]
-
-DIA A - [NOME DO GRUPO MUSCULAR]
-
-AQUECIMENTO
-1. [Exercício] - [tempo/repetições]
-2. [Exercício] - [tempo/repetições]
-
-TREINO PRINCIPAL
-1. [Nome do exercício]
-   Séries: [número], Repetições: [número], Descanso: [tempo]
-
-2. [Nome do exercício]
-   Séries: [número], Repetições: [número], Descanso: [tempo]
-
-3. [Nome do exercício]
-   Séries: [número], Repetições: [número], Descanso: [tempo]
-
-ALONGAMENTO
-1. [Músculo] - [tempo]
-2. [Músculo] - [tempo]
-
-[Repita a estrutura para outros dias se necessário]
-
-DICAS IMPORTANTES
-- [Dica 1]
-- [Dica 2]
-- [Dica 3]
-
-PROGRESSÃO
-[Orientações de como progredir ao longo das semanas]
-
-OBSERVAÇÕES
-[Avisos de segurança e recomendações]
-
-REGRAS DE FORMATAÇÃO:
-- Use MAIÚSCULAS apenas para títulos de seções (DIA A, AQUECIMENTO, etc)
-- Liste exercícios numerados (1., 2., 3.)
-- Coloque séries/repetições em linhas separadas SEMPRE
-- Use travessão (-) para listas de dicas
-- NÃO use asteriscos ou tabelas markdown
-- Mantenha espaçamento consistente
-- Seja claro e direto
-
-Seja motivador e profissional! Este é um plano educacional."""
+Gere 3 dias de treino (A, B, C) adaptados ao perfil. Seja específico e prático."""
 
         try:
             # Create a unique session for this request
