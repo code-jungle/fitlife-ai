@@ -522,6 +522,18 @@ class FitLifeAPITester:
         self.test_invalid_login()
         self.test_unauthorized_access()
         
+        # Payment system tests
+        print("\n💳 PAYMENT SYSTEM TESTS")
+        print("-" * 60)
+        self.test_get_subscription_packages()
+        self.test_get_subscription_status()
+        session_id = self.test_create_checkout_session()
+        if session_id:
+            self.test_get_checkout_status(session_id)
+        self.test_create_checkout_invalid_package()
+        self.test_subscription_status_requires_auth()
+        self.test_checkout_requires_auth()
+        
         # Account deletion (should be last)
         self.test_delete_account()
         
