@@ -194,94 +194,47 @@ INSTRUÇÕES
 
 RETORNE APENAS ESTE JSON (sem texto extra):
 
-PLANO NUTRICIONAL - {profile.full_name.upper()}
+{{
+  "calories": 2000,
+  "protein": 150,
+  "carbs": 200,
+  "fats": 60,
+  "meals": {{
+    "breakfast": [
+      {{"food": "Nome", "quantity": "quantidade", "details": "opcional"}}
+    ],
+    "breakfast_cal": 400,
+    "morning_snack": [
+      {{"food": "Nome", "quantity": "quantidade"}}
+    ],
+    "morning_snack_cal": 150,
+    "lunch": [
+      {{"food": "Nome", "quantity": "quantidade"}}
+    ],
+    "lunch_cal": 600,
+    "afternoon_snack": [
+      {{"food": "Nome", "quantity": "quantidade"}}
+    ],
+    "afternoon_snack_cal": 200,
+    "dinner": [
+      {{"food": "Nome", "quantity": "quantidade"}}
+    ],
+    "dinner_cal": 500,
+    "supper": [
+      {{"food": "Nome", "quantity": "quantidade"}}
+    ],
+    "supper_cal": 150,
+    "shopping_list": [
+      {{"item": "Nome", "price": 10.00}}
+    ],
+    "total_cost": "120.00",
+    "substitutions": [
+      {{"original": "Alimento", "alternative": "Substituto"}}
+    ]
+  }}
+}}
 
-METAS DIÁRIAS
-Calorias: [valor] kcal
-Proteínas: [valor]g
-Carboidratos: [valor]g
-Gorduras: [valor]g
-
-CAFÉ DA MANHÃ
-
-1. [Alimento] - [quantidade]
-2. [Alimento] - [quantidade]
-3. [Alimento] - [quantidade]
-
-Total: [calorias aproximadas]
-
-LANCHE DA MANHÃ
-
-1. [Alimento] - [quantidade]
-2. [Alimento] - [quantidade]
-
-Total: [calorias aproximadas]
-
-ALMOÇO
-
-1. [Alimento] - [quantidade]
-2. [Alimento] - [quantidade]
-3. [Alimento] - [quantidade]
-4. [Alimento] - [quantidade]
-
-Total: [calorias aproximadas]
-
-LANCHE DA TARDE
-
-1. [Alimento] - [quantidade]
-2. [Alimento] - [quantidade]
-
-Total: [calorias aproximadas]
-
-JANTAR
-
-1. [Alimento] - [quantidade]
-2. [Alimento] - [quantidade]
-3. [Alimento] - [quantidade]
-
-Total: [calorias aproximadas]
-
-CEIA
-
-1. [Alimento] - [quantidade]
-
-Total: [calorias aproximadas]
-
-LISTA DE COMPRAS SEMANAL
-- [Item] - Preço aproximado: R$ [valor]
-- [Item] - Preço aproximado: R$ [valor]
-[Continue...]
-
-Total estimado: R$ [valor]
-
-DICAS DE PREPARO
-- [Dica 1]
-- [Dica 2]
-- [Dica 3]
-
-DICAS DE ECONOMIA
-- [Dica 1]
-- [Dica 2]
-
-SUBSTITUIÇÕES POSSÍVEIS
-- [Alimento] pode ser substituído por [alternativa]
-- [Alimento] pode ser substituído por [alternativa]
-
-OBSERVAÇÕES IMPORTANTES
-- [Observação 1]
-- [Observação 2]
-
-REGRAS DE FORMATAÇÃO:
-- Use MAIÚSCULAS apenas para títulos de seções (CAFÉ DA MANHÃ, ALMOÇO, etc)
-- Liste alimentos numerados (1., 2., 3.)
-- Sempre inclua quantidade após o alimento
-- Use travessão (-) para listas de dicas
-- NÃO use asteriscos ou tabelas markdown
-- Mantenha espaçamento consistente
-- Seja claro e direto
-- Foque em alimentos BARATOS e ACESSÍVEIS
-
-Seja prático e realista! Foque em alimentação econômica e nutritiva."""
+Gere um plano completo com alimentos BARATOS e ACESSÍVEIS."""
 
         try:
             # Create a unique session for this request
