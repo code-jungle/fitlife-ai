@@ -215,15 +215,27 @@ const DashboardNew = () => {
             </h1>
           </div>
           
-          <Button 
-            variant="ghost" 
-            size="sm"
-            onClick={handleLogout}
-            className="text-white/80 hover:text-white"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Sair
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="default"
+              size="sm"
+              onClick={() => navigate('/upgrade')}
+              className="btn-primary"
+            >
+              <Crown className="w-4 h-4 mr-2" />
+              Seja Premium
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={handleLogout}
+              className="text-white/80 hover:text-white"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sair
+            </Button>
+          </div>
         </div>
       </div>
 
