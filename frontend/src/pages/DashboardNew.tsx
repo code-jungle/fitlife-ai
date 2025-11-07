@@ -450,13 +450,13 @@ const DashboardNew = () => {
                                     <Eye className="w-4 h-4" />
                                   </Button>
                                 </DialogTrigger>
-                                <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+                                <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto custom-scrollbar">
                                   <DialogHeader>
-                                    <DialogTitle>Plano Nutricional</DialogTitle>
+                                    <DialogTitle>Plano Nutricional Completo</DialogTitle>
                                   </DialogHeader>
-                                  <pre className="whitespace-pre-wrap text-sm">
-                                    {nutrition.content}
-                                  </pre>
+                                  <div className="mt-4">
+                                    <NutritionDisplay content={nutrition.content} />
+                                  </div>
                                 </DialogContent>
                               </Dialog>
                               <Button 
