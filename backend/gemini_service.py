@@ -103,9 +103,61 @@ Gere 3 dias de treino (A, B, C) adaptados ao perfil. Seja específico e prático
             ).with_model("gemini", "gemini-2.0-flash")
             
             user_message = UserMessage(text=prompt)
-            response = await chat.send_message(user_message)
+            json_response = await chat.send_message(user_message)
             
-            return response
+            # Try to parse JSON response
+            try:
+                # Remove markdown code blocks if present
+                cleaned_response = json_response.strip()
+                if cleaned_response.startswith('```'):
+                    cleaned_response = cleaned_response.split('```')[1]
+                    if cleaned_response.startswith('json'):
+                        cleaned_response = cleaned_response[4:]
+                cleaned_response = cleaned_response.strip()
+                
+                workout_data = json.loads(cleaned_response)
+                
+                # Format days using template
+                formatted_days = []
+                for day in workout_data.get('days', []):
+                    # Format warmup
+                    warmup_text = ""
+                    for i, ex in enumerate(day.get('warmup', []), 1):
+                        warmup_text += format_warmup_item(i, ex['exercise'], ex['duration'])
+                    
+                    # Format main workout
+                    main_text = ""
+                    for i, ex in enumerate(day.get('main_workout', []), 1):
+                        main_text += format_exercise_item(
+                            i, ex['name'], ex['sets'], ex['reps'], ex['rest']
+                        )
+                    
+                    # Format cooldown
+                    cooldown_text = ""
+                    for i, stretch in enumerate(day.get('cooldown', []), 1):
+                        cooldown_text += format_cooldown_item(i, stretch['muscle'], stretch['duration'])
+                    
+                    formatted_days.append({
+                        'title': day['title'],
+                        'warmup': warmup_text,
+                        'main_workout': main_text,
+                        'cooldown': cooldown_text
+                    })
+                
+                # Generate final workout using template
+                final_workout = get_workout_template(
+                    profile_name=profile.full_name,
+                    frequency=workout_data.get('frequency', '3 a 4 vezes por semana'),
+                    division=workout_data.get('division', 'Treino ABC'),
+                    days=formatted_days
+                )
+                
+                return final_workout
+                
+            except (json.JSONDecodeError, KeyError) as parse_error:
+                print(f"Erro ao parsear JSON, usando resposta direta: {str(parse_error)}")
+                # Se falhar o parse, retorna resposta direta mas limpa
+                return json_response.replace('**', '').replace('*', '')
             
         except Exception as e:
             print(f"Erro ao gerar treino: {str(e)}")
