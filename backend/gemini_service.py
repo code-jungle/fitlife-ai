@@ -171,11 +171,10 @@ Gere 3 dias de treino (A, B, C) adaptados ao perfil. Seja específico e prático
         """
         bmi = self._calculate_bmi(profile.weight, profile.height)
         
-        system_message = """Você é um nutricionista experiente especializado em criar planos alimentares acessíveis e práticos.
-Seu foco é em alimentos brasileiros comuns, baratos e fáceis de encontrar.
-IMPORTANTE: Siga EXATAMENTE o formato especificado para garantir consistência visual."""
+        system_message = """Você é um nutricionista experiente especializado em criar planos alimentares acessíveis.
+Você deve retornar APENAS um JSON estruturado com os dados do plano. NÃO adicione texto extra."""
         
-        prompt = f"""Crie um plano nutricional personalizado com base nas seguintes informações:
+        prompt = f"""Crie um plano nutricional personalizado retornando um JSON estruturado.
 
 PERFIL
 Nome: {profile.full_name}
@@ -184,23 +183,16 @@ Peso: {profile.weight} kg
 Altura: {profile.height} cm
 IMC: {bmi}
 Objetivos: {profile.objectives}
-Restrições alimentares: {profile.dietary_restrictions or "Nenhuma restrição"}
-Nível de atividade: {profile.current_activities or "Sedentário"}
+Restrições: {profile.dietary_restrictions or "Nenhuma"}
+Atividade: {profile.current_activities or "Sedentário"}
 
-INSTRUÇÕES - ALIMENTOS ACESSÍVEIS
-PRIORIZE alimentos baratos e comuns:
-- Ovos, frango, carne moída
-- Arroz, feijão, macarrão
-- Batata, mandioca, banana
-- Aveia, pão integral
-- Leite, iogurte natural
-- Frutas da estação
-- Verduras comuns
+INSTRUÇÕES
+- Use APENAS alimentos baratos: ovos, frango, arroz, feijão, batata, banana, pão, leite
+- EVITE: castanhas caras, salmão, quinoa, superfoods
+- Respeite restrições alimentares
+- Seja específico nas quantidades
 
-EVITE alimentos caros:
-- Castanhas importadas, salmão, quinoa, chia, superfoods exóticos
-
-FORMATO OBRIGATÓRIO - SIGA EXATAMENTE ESTA ESTRUTURA:
+RETORNE APENAS ESTE JSON (sem texto extra):
 
 PLANO NUTRICIONAL - {profile.full_name.upper()}
 
