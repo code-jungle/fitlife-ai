@@ -84,7 +84,11 @@ RETORNE APENAS ESTE JSON (sem texto extra):
         }}
       ],
       "cooldown": [
-        {{"muscle": "Nome do músculo", "duration": "30 segundos"}}
+        {{
+          "muscle": "Nome do músculo",
+          "duration": "30 segundos",
+          "instructions": "Descrição passo a passo de como fazer o alongamento"
+        }}
       ]
     }}
   ]
