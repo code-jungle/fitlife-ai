@@ -53,12 +53,38 @@ const WorkoutDisplay: React.FC<WorkoutDisplayProps> = ({ content }) => {
                      trimmedLine.match(/TREINO/i) ? '💪' :
                      trimmedLine.match(/EXERCÍCIO/i) ? '🏋️' : '📅';
         
+        const bgColor = trimmedLine.match(/ALONGAMENTO/i) ? 'bg-blue-500/10 border-blue-500/20' : 'bg-gradient-primary/10 border-primary/20';
+        
         formattedLines.push(
-          <div key={lineKey++} className="flex items-center gap-2 mt-5 mb-2 p-3 rounded-lg bg-gradient-primary/10 border border-primary/20">
+          <div key={lineKey++} className={`flex items-center gap-2 mt-5 mb-2 p-3 rounded-lg ${bgColor}`}>
             <span className="text-2xl">{emoji}</span>
             <h4 className="text-lg font-semibold text-foreground">
               {trimmedLine}
             </h4>
+          </div>
+        );
+        return;
+      }
+      
+      // Stretching instructions (Como fazer:)
+      if (trimmedLine.match(/^\s*Como fazer:/i)) {
+        const instruction = trimmedLine.replace(/^\s*Como fazer:/i, '').trim();
+        formattedLines.push(
+          <div key={lineKey++} className="ml-8 mb-2 p-2 rounded bg-blue-500/5 border-l-2 border-blue-500">
+            <p className="text-sm text-blue-200 italic">{instruction}</p>
+          </div>
+        );
+        return;
+      }
+      
+      // Stretching guidance text
+      if (trimmedLine.match(/Mantenha cada posição|Respire profundamente/i)) {
+        formattedLines.push(
+          <div key={lineKey++} className="ml-4 mb-3 p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+            <p className="text-xs text-blue-300 italic flex items-center gap-2">
+              <AlertCircle className="w-4 h-4" />
+              {trimmedLine}
+            </p>
           </div>
         );
         return;
