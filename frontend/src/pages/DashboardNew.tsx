@@ -217,6 +217,8 @@ const DashboardNew = () => {
           </div>
           
           <div className="flex items-center gap-2">
+            <PWAInstallButton />
+            
             <Button 
               variant="default"
               size="sm"
