@@ -120,12 +120,13 @@ const WorkoutDisplay: React.FC<WorkoutDisplayProps> = ({ content }) => {
       }
 
       // Tips/Notes (starts with 💡, Dica:, Observação:, etc)
-      if (trimmedLine.match(/^(💡|⚠️|📌|Dica:|Observação:|Importante:|Nota:)/i)) {
+      if (trimmedLine.match(/^(💡|⚠️|📌|Dica:|Observação:|Importante:|Nota:|Atenção)/i)) {
+        const cleanedTip = trimmedLine.replace(/^(💡|⚠️|📌|Dica:|Observação:|Importante:|Nota:|Atenção:)/i, '').trim();
         formattedLines.push(
           <div key={lineKey++} className="my-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
             <div className="flex items-start gap-2">
               <AlertCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
-              <p className="text-sm text-foreground">{trimmedLine}</p>
+              <p className="text-sm text-foreground leading-relaxed">{cleanedTip}</p>
             </div>
           </div>
         );
