@@ -9,7 +9,7 @@ import {
   SuggestionsHistory
 } from '@/types/auth';
 
-const API_BASE_URL = import.meta.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL || '';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'https://smart-workout-38.preview.emergentagent.com';
 
 class ApiService {
   private client: AxiosInstance;
