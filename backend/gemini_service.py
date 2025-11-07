@@ -368,33 +368,109 @@ Gere um plano completo com alimentos BARATOS e ACESSÍVEIS."""
             return self._get_default_nutrition(profile)
     
     def _get_default_workout(self, profile: Profile) -> str:
-        """Fallback workout plan"""
-        return f"""**PLANO DE TREINO - {profile.full_name}**
+        """Fallback workout plan with detailed stretches"""
+        return f"""PLANO DE TREINO - {profile.full_name.upper()}
 
-⚠️ Este é um plano básico gerado automaticamente. Para melhores resultados, complete seu perfil.
+FREQUÊNCIA SEMANAL
+3 vezes por semana com 1 dia de descanso entre treinos
 
-**TREINO ABC - 3x por semana**
+DIVISÃO DO TREINO
+ABC - Treino dividido por grupos musculares
 
-**DIA A - PEITO E TRÍCEPS**
-1. Aquecimento: 5 min de movimentos articulares
-2. Flexões: 3 séries de 10-15 repetições
-3. Mergulho entre cadeiras: 3 séries de 8-12 repetições
-4. Alongamento: 5 minutos
+DIA A - PEITO E TRÍCEPS
 
-**DIA B - COSTAS E BÍCEPS**
-1. Aquecimento: 5 min
-2. Remada com peso improvisado: 3 séries de 12 repetições
-3. Rosca direta: 3 séries de 12 repetições
-4. Alongamento: 5 minutos
+AQUECIMENTO
+1. Polichinelos - 3 minutos
+2. Rotação de braços - 2 minutos
 
-**DIA C - PERNAS E CORE**
-1. Aquecimento: 5 min
-2. Agachamento: 3 séries de 15 repetições
-3. Afundo: 3 séries de 10 repetições (cada perna)
-4. Prancha: 3 séries de 30 segundos
-5. Alongamento: 5 minutos
+TREINO PRINCIPAL
+1. Flexões no solo
+   Séries: 3, Repetições: 10-15, Descanso: 60 segundos
 
-💡 **Dica:** Descanse 1-2 minutos entre as séries."""
+2. Mergulho entre cadeiras
+   Séries: 3, Repetições: 8-12, Descanso: 60 segundos
+
+ALONGAMENTO
+Mantenha cada posição de forma estática, sem forçar além do limite confortável.
+Respire profundamente durante o alongamento para melhor relaxamento muscular.
+
+1. Alongamento de Peitoral - 30 segundos
+   Como fazer: Fique de pé ao lado de uma parede, apoie a mão na altura do ombro e gire o tronco para o lado oposto
+
+2. Alongamento de Tríceps - 30 segundos (cada braço)
+   Como fazer: Levante um braço, dobre o cotovelo levando a mão nas costas, use a outra mão para puxar suavemente o cotovelo
+
+DIA B - COSTAS E BÍCEPS
+
+AQUECIMENTO
+1. Marcha no lugar - 3 minutos
+2. Circundução de ombros - 2 minutos
+
+TREINO PRINCIPAL
+1. Remada com peso improvisado
+   Séries: 3, Repetições: 12, Descanso: 60 segundos
+
+2. Rosca direta
+   Séries: 3, Repetições: 12, Descanso: 60 segundos
+
+ALONGAMENTO
+Mantenha cada posição de forma estática, sem forçar além do limite confortável.
+Respire profundamente durante o alongamento para melhor relaxamento muscular.
+
+1. Alongamento de Costas - 30 segundos
+   Como fazer: Sentado ou em pé, entrelace os dedos à frente do corpo e empurre as palmas para frente arredondando as costas
+
+2. Alongamento de Bíceps - 30 segundos (cada braço)
+   Como fazer: Estenda o braço à frente com a palma para cima, use a outra mão para puxar suavemente os dedos para trás
+
+DIA C - PERNAS E CORE
+
+AQUECIMENTO
+1. Elevação de joelhos - 3 minutos
+2. Círculos com tornozelos - 2 minutos
+
+TREINO PRINCIPAL
+1. Agachamento
+   Séries: 3, Repetições: 15, Descanso: 60 segundos
+
+2. Afundo alternado
+   Séries: 3, Repetições: 10 (cada perna), Descanso: 60 segundos
+
+3. Prancha abdominal
+   Séries: 3, Repetições: 30 segundos, Descanso: 45 segundos
+
+ALONGAMENTO
+Mantenha cada posição de forma estática, sem forçar além do limite confortável.
+Respire profundamente durante o alongamento para melhor relaxamento muscular.
+
+1. Alongamento de Quadríceps - 30 segundos (cada perna)
+   Como fazer: Em pé, segure um pé atrás levando o calcanhar em direção ao glúteo, mantenha os joelhos alinhados
+
+2. Alongamento de Posteriores de coxa - 30 segundos (cada perna)
+   Como fazer: Sentado no chão, estenda uma perna à frente, dobre a outra, incline o tronco buscando tocar o pé
+
+3. Alongamento de Panturrilha - 30 segundos (cada perna)
+   Como fazer: Apoie as mãos na parede, estenda uma perna atrás mantendo o calcanhar no chão, dobre a perna da frente
+
+DICAS IMPORTANTES
+- Mantenha sempre uma boa postura durante os exercícios
+- Hidrate-se antes, durante e após o treino
+- Respeite os intervalos de descanso entre as séries
+- Aumente a carga progressivamente conforme evolui
+- Em caso de dor, interrompa o exercício
+
+PROGRESSÃO
+Semana 1-2: Foque na execução correta dos movimentos
+Semana 3-4: Aumente levemente a carga mantendo a forma
+Semana 5-6: Reduza o tempo de descanso entre séries
+Semana 7-8: Aumente repetições ou adicione uma série extra
+
+OBSERVAÇÕES DE SEGURANÇA
+- Consulte um profissional antes de iniciar
+- Faça um aquecimento adequado antes de cada treino
+- Não treine o mesmo grupo muscular em dias consecutivos
+- Descanse pelo menos 1 dia por semana
+- Mantenha uma alimentação adequada para seus objetivos"""
     
     def _get_default_nutrition(self, profile: Profile) -> str:
         """Fallback nutrition plan"""
