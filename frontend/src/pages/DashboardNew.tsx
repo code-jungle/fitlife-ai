@@ -95,6 +95,22 @@ const DashboardNew = () => {
       setLoadingHistory(false);
     }
   };
+  
+  const loadSubscriptionData = async () => {
+    setLoadingSubscription(true);
+    try {
+      const [status, packagesData] = await Promise.all([
+        api.getSubscriptionStatus(),
+        api.getSubscriptionPackages()
+      ]);
+      setSubscriptionStatus(status);
+      setPackages(packagesData.packages);
+    } catch (error) {
+      console.error("Erro ao carregar dados de assinatura:", error);
+    } finally {
+      setLoadingSubscription(false);
+    }
+  };
 
   const handleGenerateWorkout = async () => {
     setLoadingWorkout(true);
