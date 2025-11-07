@@ -190,10 +190,15 @@ LEMBRE-SE: Alongamentos devem ter instruções detalhadas de execução!"""
         """
         bmi = self._calculate_bmi(profile.weight, profile.height)
         
-        system_message = """Você é um nutricionista experiente especializado em criar planos alimentares acessíveis.
-Você deve retornar APENAS um JSON estruturado com os dados do plano. NÃO adicione texto extra."""
+        system_message = """Você é um nutricionista especializado em planos alimentares ECONÔMICOS e ACESSÍVEIS.
+Você DEVE usar APENAS alimentos da lista permitida.
+Retorne APENAS um JSON estruturado. NÃO adicione texto extra."""
         
-        prompt = f"""Crie um plano nutricional personalizado retornando um JSON estruturado.
+        # Get allowed and forbidden foods lists
+        allowed_foods = get_allowed_foods_text()
+        forbidden_foods = get_forbidden_foods_text()
+        
+        prompt = f"""Crie um plano nutricional ECONÔMICO e ACESSÍVEL retornando um JSON estruturado.
 
 PERFIL
 Nome: {profile.full_name}
@@ -205,11 +210,20 @@ Objetivos: {profile.objectives}
 Restrições: {profile.dietary_restrictions or "Nenhuma"}
 Atividade: {profile.current_activities or "Sedentário"}
 
-INSTRUÇÕES
-- Use APENAS alimentos baratos: ovos, frango, arroz, feijão, batata, banana, pão, leite
-- EVITE: castanhas caras, salmão, quinoa, superfoods
-- Respeite restrições alimentares
-- Seja específico nas quantidades
+{allowed_foods}
+
+{forbidden_foods}
+
+REGRAS OBRIGATÓRIAS:
+1. Use APENAS alimentos da lista permitida acima
+2. NUNCA use alimentos da lista proibida
+3. Priorize: ovos, frango, carne moída, arroz, feijão, batata, banana, pão, leite, aveia
+4. Evite alimentos caros como: salmão, camarão, quinoa, chia, castanhas caras, superfoods
+5. Preços devem ser realistas (R$ 5 a R$ 20 por item)
+6. Total da semana deve ficar entre R$ 100 e R$ 150
+7. Respeite as restrições alimentares do perfil
+
+IMPORTANTE: Se incluir algum alimento caro ou não permitido, o plano será rejeitado!
 
 RETORNE APENAS ESTE JSON (sem texto extra):
 
