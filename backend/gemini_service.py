@@ -247,9 +247,107 @@ Gere um plano completo com alimentos BARATOS e ACESSÍVEIS."""
             ).with_model("gemini", "gemini-2.0-flash")
             
             user_message = UserMessage(text=prompt)
-            response = await chat.send_message(user_message)
+            json_response = await chat.send_message(user_message)
             
-            return response
+            # Try to parse JSON response
+            try:
+                # Remove markdown code blocks if present
+                cleaned_response = json_response.strip()
+                if cleaned_response.startswith('```'):
+                    cleaned_response = cleaned_response.split('```')[1]
+                    if cleaned_response.startswith('json'):
+                        cleaned_response = cleaned_response[4:]
+                cleaned_response = cleaned_response.strip()
+                
+                nutrition_data = json.loads(cleaned_response)
+                meals_data = nutrition_data.get('meals', {})
+                
+                # Format meals
+                formatted_meals = {}
+                
+                # Breakfast
+                breakfast_text = ""
+                for i, food in enumerate(meals_data.get('breakfast', []), 1):
+                    breakfast_text += format_food_item(
+                        i, food['food'], food['quantity'], food.get('details', '')
+                    )
+                formatted_meals['breakfast'] = breakfast_text
+                formatted_meals['breakfast_cal'] = meals_data.get('breakfast_cal', 400)
+                
+                # Morning snack
+                morning_snack_text = ""
+                for i, food in enumerate(meals_data.get('morning_snack', []), 1):
+                    morning_snack_text += format_food_item(
+                        i, food['food'], food['quantity'], food.get('details', '')
+                    )
+                formatted_meals['morning_snack'] = morning_snack_text
+                formatted_meals['morning_snack_cal'] = meals_data.get('morning_snack_cal', 150)
+                
+                # Lunch
+                lunch_text = ""
+                for i, food in enumerate(meals_data.get('lunch', []), 1):
+                    lunch_text += format_food_item(
+                        i, food['food'], food['quantity'], food.get('details', '')
+                    )
+                formatted_meals['lunch'] = lunch_text
+                formatted_meals['lunch_cal'] = meals_data.get('lunch_cal', 600)
+                
+                # Afternoon snack
+                afternoon_snack_text = ""
+                for i, food in enumerate(meals_data.get('afternoon_snack', []), 1):
+                    afternoon_snack_text += format_food_item(
+                        i, food['food'], food['quantity'], food.get('details', '')
+                    )
+                formatted_meals['afternoon_snack'] = afternoon_snack_text
+                formatted_meals['afternoon_snack_cal'] = meals_data.get('afternoon_snack_cal', 200)
+                
+                # Dinner
+                dinner_text = ""
+                for i, food in enumerate(meals_data.get('dinner', []), 1):
+                    dinner_text += format_food_item(
+                        i, food['food'], food['quantity'], food.get('details', '')
+                    )
+                formatted_meals['dinner'] = dinner_text
+                formatted_meals['dinner_cal'] = meals_data.get('dinner_cal', 500)
+                
+                # Supper
+                supper_text = ""
+                for i, food in enumerate(meals_data.get('supper', []), 1):
+                    supper_text += format_food_item(
+                        i, food['food'], food['quantity'], food.get('details', '')
+                    )
+                formatted_meals['supper'] = supper_text
+                formatted_meals['supper_cal'] = meals_data.get('supper_cal', 150)
+                
+                # Shopping list
+                shopping_text = ""
+                for item_data in meals_data.get('shopping_list', []):
+                    shopping_text += f"- {item_data['item']} - Preço aproximado: R$ {item_data['price']:.2f}\n"
+                formatted_meals['shopping_list'] = shopping_text
+                formatted_meals['total_cost'] = meals_data.get('total_cost', '120.00')
+                
+                # Substitutions
+                substitutions_text = ""
+                for sub in meals_data.get('substitutions', []):
+                    substitutions_text += f"- {sub['original']} pode ser substituído por {sub['alternative']}\n"
+                formatted_meals['substitutions'] = substitutions_text
+                
+                # Generate final nutrition plan using template
+                final_nutrition = get_nutrition_template(
+                    profile_name=profile.full_name,
+                    calories=nutrition_data.get('calories', 2000),
+                    protein=nutrition_data.get('protein', 150),
+                    carbs=nutrition_data.get('carbs', 200),
+                    fats=nutrition_data.get('fats', 60),
+                    meals=formatted_meals
+                )
+                
+                return final_nutrition
+                
+            except (json.JSONDecodeError, KeyError) as parse_error:
+                print(f"Erro ao parsear JSON de nutrição, usando resposta direta: {str(parse_error)}")
+                # Se falhar o parse, retorna resposta direta mas limpa
+                return json_response.replace('**', '').replace('*', '')
             
         except Exception as e:
             print(f"Erro ao gerar plano nutricional: {str(e)}")
