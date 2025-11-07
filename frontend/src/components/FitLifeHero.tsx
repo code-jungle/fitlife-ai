@@ -41,7 +41,7 @@ const FitLifeHero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
             <Button 
               className="btn-primary text-lg px-8 py-4 h-auto"
-              onClick={() => navigate('/register-complete')}
+              onClick={() => navigate('/register')}
             >
               <span>Começar Jornada Grátis</span>
               <ArrowRight className="w-5 h-5 ml-2" />
