@@ -33,13 +33,13 @@ const WorkoutDisplay: React.FC<WorkoutDisplayProps> = ({ content }) => {
         return;
       }
 
-      // Main titles (all caps or starts with **)
-      if (trimmedLine.match(/^\*\*.*\*\*/) || trimmedLine === trimmedLine.toUpperCase() && trimmedLine.length > 10) {
+      // Main titles (all caps)
+      if (trimmedLine === trimmedLine.toUpperCase() && trimmedLine.length > 10 && !trimmedLine.match(/^\d/)) {
         formattedLines.push(
           <div key={lineKey++} className="flex items-center gap-2 mt-6 mb-3">
             <Dumbbell className="w-5 h-5 text-primary" />
             <h3 className="text-xl font-bold gradient-text">
-              {trimmedLine.replace(/\*\*/g, '')}
+              {trimmedLine}
             </h3>
           </div>
         );
