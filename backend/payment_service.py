@@ -55,8 +55,8 @@ class PaymentService:
         package = self.get_package_details(package_id)
         
         # Build dynamic URLs from frontend origin
-        success_url = f"{origin_url}/payment/success?session_id={{CHECKOUT_SESSION_ID}}"
-        cancel_url = f"{origin_url}/dashboard"
+        success_url = f"{origin_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{origin_url}/payment-cancel"
         
         # Create metadata with user info
         metadata = {
