@@ -13,6 +13,7 @@ import UpgradePremium from "@/pages/UpgradePremium";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import PaymentCancel from "@/pages/PaymentCancel";
 import NotFound from "@/pages/NotFound";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { useAuth } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
