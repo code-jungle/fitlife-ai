@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Icons</title>
+</head>
+<body>
+    <canvas id="canvas192" width="192" height="192"></canvas>
+    <canvas id="canvas512" width="512" height="512"></canvas>
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#8B5CF6');
+            gradient.addColorStop(1, '#EC4899');
+            
+            // Rounded rectangle background
+            const radius = size / 4;
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            
+            // Dumbbell icon (simplified)
+            ctx.fillStyle = 'white';
+            const scale = size / 512;
+            const offsetX = size * 0.25;
+            const offsetY = size * 0.35;
+            
+            // Left weight
+            ctx.fillRect(offsetX, offsetY + 50*scale, 40*scale, 52*scale);
+            // Bar
+            ctx.fillRect(offsetX + 40*scale, offsetY + 70*scale, 176*scale, 12*scale);
+            // Right weight
+            ctx.fillRect(offsetX + 216*scale, offsetY + 50*scale, 40*scale, 52*scale);
+        }
+        
+        drawIcon(document.getElementById('canvas192'), 192);
+        drawIcon(document.getElementById('canvas512'), 512);
+        
+        console.log('Icons generated in canvas elements');
+    </script>
+</body>
+</html>
