@@ -495,16 +495,13 @@ metadata:
 
 test_plan:
   current_focus: 
-    - "Registration Page - Complete form"
-    - "Login Page"
-    - "Dashboard - Tab Sugestões IA"
-    - "Dashboard - Tab Histórico"
-    - "Dashboard - Tab Perfil"
-    - "Profile Edit Modal"
-    - "Auth Context with JWT"
-    - "API Service"
+    - "Payment - Create checkout session"
+    - "Payment - Get checkout status"
+    - "Payment - Stripe webhook"
+    - "Subscription - Get status"
+    - "Subscription - Get packages"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
