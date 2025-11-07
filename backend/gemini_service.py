@@ -62,6 +62,8 @@ INSTRUÇÕES
 - Considere atividades atuais
 - Inclua aquecimento, treino e alongamento
 - Seja específico nas séries e repetições
+- IMPORTANTE: Para alongamentos, descreva COMO FAZER cada um passo a passo
+- Exemplo alongamento: "Sentado, estenda uma perna à frente, incline o tronco buscando tocar os dedos dos pés"
 
 RETORNE APENAS ESTE JSON (sem texto extra):
 
