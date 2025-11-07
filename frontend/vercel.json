@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://smart-workout-38.preview.emergentagent.com/api/:path*"
+      "destination": "https://fitgenai.preview.emergentagent.com/api/:path*"
     }
   ]
 }

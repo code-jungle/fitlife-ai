@@ -82,10 +82,10 @@ db.users.deleteOne({"email": "seu@email.com"})
 ### Testar Backend Diretamente
 ```bash
 # Teste de saúde
-curl https://smart-workout-38.preview.emergentagent.com/api/health
+curl https://fitgenai.preview.emergentagent.com/api/health
 
 # Teste de registro
-curl -X POST https://smart-workout-38.preview.emergentagent.com/api/auth/register \
+curl -X POST https://fitgenai.preview.emergentagent.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "teste123@email.com",

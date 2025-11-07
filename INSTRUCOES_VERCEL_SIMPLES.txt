@@ -42,7 +42,7 @@ No terminal, execute:
 6. Adicione esta variável:
    ┌────────────────────────────────────────────────────────────┐
    │ Key:   VITE_BACKEND_URL                               │
-   │ Value: https://smart-workout-38.preview.emergentagent.com  │
+   │ Value: https://fitgenai.preview.emergentagent.com  │
    │ Environments: ☑ Production ☑ Preview ☑ Development        │
    └────────────────────────────────────────────────────────────┘
 

@@ -31,7 +31,7 @@ Node.js Version: 18.x
 Adicione em **Environment Variables** no Vercel:
 
 ```
-VITE_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
+VITE_BACKEND_URL = https://fitgenai.preview.emergentagent.com
 ```
 
 ⚠️ **IMPORTANTE:** Adicione para todos os ambientes (Production, Preview, Development)
@@ -104,8 +104,8 @@ Antes do deploy, confirme:
 ## 🎯 URLs do Projeto
 
 - **Frontend (Vercel):** https://seu-projeto.vercel.app
-- **Backend (Emergent):** https://smart-workout-38.preview.emergentagent.com
-- **API Endpoint:** https://smart-workout-38.preview.emergentagent.com/api
+- **Backend (Emergent):** https://fitgenai.preview.emergentagent.com
+- **API Endpoint:** https://fitgenai.preview.emergentagent.com/api
 
 ## 📝 Notas Importantes
 
@@ -131,7 +131,7 @@ Se encontrar problemas:
 1. Verifique logs do build no Vercel
 2. Verifique console do browser (F12)
 3. Verifique Network tab para chamadas API
-4. Teste o backend diretamente: `https://smart-workout-38.preview.emergentagent.com/api/health`
+4. Teste o backend diretamente: `https://fitgenai.preview.emergentagent.com/api/health`
 
 ## 🔄 Próximos Deploys
 

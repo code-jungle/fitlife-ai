@@ -19,7 +19,7 @@
    └─ Install Command: yarn install
 
 3. ENVIRONMENT VARIABLES
-   └─ VITE_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
+   └─ VITE_BACKEND_URL = https://fitgenai.preview.emergentagent.com
       ⚠️ Adicionar em: Production, Preview, Development
 
 ┌───────────────────────────────────────────────────────────────┐
@@ -53,7 +53,7 @@ git push origin main
     ↓
     EMERGENT (Backend)
     FastAPI + MongoDB
-    https://smart-workout-38.preview.emergentagent.com/api
+    https://fitgenai.preview.emergentagent.com/api
 
 ┌───────────────────────────────────────────────────────────────┐
 │  ❌ ERROS COMUNS E SOLUÇÕES                                   │
@@ -79,7 +79,7 @@ Documentação completa: DEPLOY_VERCEL.md
 Checklist automático: ./deploy-checklist.sh
 
 Teste o backend:
-https://smart-workout-38.preview.emergentagent.com/api/health
+https://fitgenai.preview.emergentagent.com/api/health
 
 ╔═══════════════════════════════════════════════════════════════╗
 ║  ⚡ APÓS PRIMEIRO DEPLOY: DEPLOYMENTS AUTOMÁTICOS             ║

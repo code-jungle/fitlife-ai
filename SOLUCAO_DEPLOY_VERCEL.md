@@ -44,7 +44,7 @@ Install Command: (deixe vazio - usará vercel.json)
 
 **Environment Variables:**
 ```
-VITE_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
+VITE_BACKEND_URL = https://fitgenai.preview.emergentagent.com
 ```
 
 Adicione para: Production, Preview, Development
