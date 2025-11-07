@@ -1,9 +1,18 @@
 import os
 import uuid
+import json
 from dotenv import load_dotenv
 from pathlib import Path
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from models import Profile
+from templates import (
+    get_workout_template, 
+    get_nutrition_template,
+    format_exercise_item,
+    format_food_item,
+    format_warmup_item,
+    format_cooldown_item
+)
 
 # Load environment variables
 ROOT_DIR = Path(__file__).parent
