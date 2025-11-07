@@ -501,6 +501,42 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Botão 'Seja Premium' adicionado ao header do dashboard, navegando para /upgrade."
+  
+  - task: "PWA - Manifest and Service Worker"
+    implemented: true
+    working: "NA"
+    file: "public/manifest.json, public/sw.js, index.html"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "PWA implementada com manifest.json (nome, ícones, cores), service worker para cache offline, meta tags no index.html. Ícones SVG criados (192x192 e 512x512)."
+  
+  - task: "PWA - Install Prompt Modal"
+    implemented: true
+    working: "NA"
+    file: "components/PWAInstallPrompt.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Modal de instalação PWA implementado. Detecta evento beforeinstallprompt, mostra prompt após 3s, permite dismissal por 7 dias, detecta se app já está instalado. Integrado no App.tsx."
+  
+  - task: "PWA - Install Button Header"
+    implemented: true
+    working: "NA"
+    file: "components/PWAInstallButton.tsx, pages/DashboardNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Botão de instalação PWA adicionado ao header do dashboard. Detecta se app pode ser instalado, mostra ícone de check quando já instalado, trigger manual de instalação, instruções para iOS."
 
 metadata:
   created_by: "main_agent"
