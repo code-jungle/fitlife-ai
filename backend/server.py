@@ -17,6 +17,8 @@ from auth import (
 )
 from database import get_database
 from gemini_service import gemini_service
+from payment_service import payment_service, SUBSCRIPTION_PACKAGES
+from emergentintegrations.payments.stripe.checkout import StripeCheckout
 
 # Load environment variables
 ROOT_DIR = Path(__file__).parent
