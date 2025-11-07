@@ -45,26 +45,25 @@ class GeminiService:
         system_message = """Você é um personal trainer experiente especializado em criar treinos personalizados.
 Você deve retornar APENAS um JSON estruturado com os dados do treino. NÃO adicione texto extra."""
         
-        prompt = f"""Crie um plano de treino personalizado com base nas seguintes informações:
+        prompt = f"""Crie um plano de treino personalizado retornando um JSON estruturado.
 
-PERFIL DO ALUNO
+PERFIL
 Nome: {profile.full_name}
 Idade: {profile.age} anos
-Peso: {profile.weight} kg
+Peso: {profile.weight} kg  
 Altura: {profile.height} cm
 IMC: {bmi}
-Local de treino: {training_location}
+Local: {training_location}
 Objetivos: {profile.objectives}
-Atividades físicas atuais: {profile.current_activities or "Nenhuma atividade regular"}
+Atividades atuais: {profile.current_activities or "Nenhuma"}
 
 INSTRUÇÕES
-1. Adapte os exercícios para {training_location}
-2. Considere as atividades físicas atuais para evitar sobrecarga
-3. Se já pratica exercícios, complemente com outros grupos musculares
-4. Inclua sempre: aquecimento, treino principal e alongamento
-5. Para cada exercício: séries, repetições e descanso
+- Adapte para {training_location}
+- Considere atividades atuais
+- Inclua aquecimento, treino e alongamento
+- Seja específico nas séries e repetições
 
-FORMATO OBRIGATÓRIO - SIGA EXATAMENTE ESTA ESTRUTURA:
+RETORNE APENAS ESTE JSON (sem texto extra):
 
 PLANO DE TREINO - {profile.full_name.upper()}
 
