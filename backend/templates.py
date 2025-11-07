@@ -162,6 +162,8 @@ def format_warmup_item(number: int, exercise: str, duration: str) -> str:
     return f"{number}. {exercise} - {duration}\n"
 
 
-def format_cooldown_item(number: int, muscle: str, duration: str) -> str:
-    """Formata um item de alongamento"""
-    return f"{number}. {muscle} - {duration}\n"
+def format_cooldown_item(number: int, muscle: str, duration: str, instructions: str = "") -> str:
+    """Formata um item de alongamento com instruções detalhadas"""
+    if instructions:
+        return f"{number}. Alongamento de {muscle} - {duration}\n   Como fazer: {instructions}\n"
+    return f"{number}. Alongamento de {muscle} - {duration}\n"
