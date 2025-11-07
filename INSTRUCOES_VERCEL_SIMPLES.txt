@@ -41,7 +41,7 @@ No terminal, execute:
 
 6. Adicione esta variável:
    ┌────────────────────────────────────────────────────────────┐
-   │ Key:   REACT_APP_BACKEND_URL                               │
+   │ Key:   VITE_BACKEND_URL                               │
    │ Value: https://smart-workout-38.preview.emergentagent.com  │
    │ Environments: ☑ Production ☑ Preview ☑ Development        │
    └────────────────────────────────────────────────────────────┘

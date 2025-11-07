@@ -109,7 +109,7 @@ Siga as instruções em [DEPLOY_VERCEL.md](./DEPLOY_VERCEL.md)
 1. Configure Root Directory: `frontend`
 2. Build Command: `yarn build`
 3. Output Directory: `build`
-4. Adicione variável: `REACT_APP_BACKEND_URL`
+4. Adicione variável: `VITE_BACKEND_URL`
 
 ### Backend (Emergent/Railway/Render)
 O backend pode ser deployado em:
@@ -123,7 +123,7 @@ O backend pode ser deployado em:
 
 ### Frontend (.env)
 ```env
-REACT_APP_BACKEND_URL=https://seu-backend.com
+VITE_BACKEND_URL=https://seu-backend.com
 ```
 
 ### Backend (.env)

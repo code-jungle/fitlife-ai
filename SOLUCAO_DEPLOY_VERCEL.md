@@ -44,7 +44,7 @@ Install Command: (deixe vazio - usará vercel.json)
 
 **Environment Variables:**
 ```
-REACT_APP_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
+VITE_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
 ```
 
 Adicione para: Production, Preview, Development
@@ -61,7 +61,7 @@ git push origin main
 ### Passo 2: Vercel
 1. Vá no seu projeto no Vercel
 2. **Settings → General → Root Directory**: deixe **VAZIO** ou coloque `./`
-3. **Settings → Environment Variables**: adicione `REACT_APP_BACKEND_URL`
+3. **Settings → Environment Variables**: adicione `VITE_BACKEND_URL`
 4. Clique em **"Redeploy"**
 
 ## 🔍 POR QUE FUNCIONA AGORA?
@@ -145,7 +145,7 @@ ls -la frontend/build/
 - [ ] `vercel.json` existe na raiz com buildCommand correto
 - [ ] `frontend/vercel.json` existe com rewrites
 - [ ] Root Directory está VAZIO no Vercel Dashboard
-- [ ] `REACT_APP_BACKEND_URL` está nas Environment Variables
+- [ ] `VITE_BACKEND_URL` está nas Environment Variables
 - [ ] Commit e push feitos
 - [ ] Redeploy no Vercel
 

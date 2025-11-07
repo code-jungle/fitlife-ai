@@ -31,7 +31,7 @@ Node.js Version: 18.x
 Adicione em **Environment Variables** no Vercel:
 
 ```
-REACT_APP_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
+VITE_BACKEND_URL = https://smart-workout-38.preview.emergentagent.com
 ```
 
 ⚠️ **IMPORTANTE:** Adicione para todos os ambientes (Production, Preview, Development)
@@ -60,13 +60,13 @@ git push origin main
 **Solução:** Verificar se Root Directory = `frontend`
 
 ### ❌ Erro: Build bem-sucedido mas site não carrega
-**Causa:** Variável de ambiente `REACT_APP_BACKEND_URL` não configurada
+**Causa:** Variável de ambiente `VITE_BACKEND_URL` não configurada
 **Solução:** Adicionar a variável de ambiente no Vercel
 
 ### ❌ API calls falham (401/403/404)
 **Causa:** Backend URL incorreto ou CORS
 **Solução:** 
-1. Verificar `REACT_APP_BACKEND_URL` está correto
+1. Verificar `VITE_BACKEND_URL` está correto
 2. Verificar backend está rodando
 3. Verificar CORS no backend permite o domínio do Vercel
 
@@ -96,7 +96,7 @@ Antes do deploy, confirme:
 - [ ] Root Directory = `frontend` no Vercel
 - [ ] Build Command = `yarn build`
 - [ ] Output Directory = `build`
-- [ ] Variável `REACT_APP_BACKEND_URL` configurada
+- [ ] Variável `VITE_BACKEND_URL` configurada
 - [ ] Backend está rodando e acessível
 - [ ] CORS configurado no backend
 - [ ] Commit e push feitos
@@ -118,7 +118,7 @@ Antes do deploy, confirme:
 
 3. **Comunicação Frontend ↔ Backend**
    - Frontend faz chamadas HTTP para o backend
-   - Configurado via `REACT_APP_BACKEND_URL`
+   - Configurado via `VITE_BACKEND_URL`
 
 4. **Arquivos de configuração**
    - `frontend/vercel.json` - Rewrites para API calls
