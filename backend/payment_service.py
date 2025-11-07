@@ -80,10 +80,10 @@ class PaymentService:
         
         return session
     
-    def is_user_premium(self, user_id: str, db) -> bool:
+    async def is_user_premium(self, user_id: str, db) -> bool:
         """Check if user is currently premium"""
         # Check if user has active trial
-        user_doc = db.users.find_one({"id": user_id})
+        user_doc = await db.users.find_one({"id": user_id})
         if not user_doc:
             return False
         
@@ -94,7 +94,7 @@ class PaymentService:
                 return True  # Still in trial
         
         # Check if user has paid subscription
-        subscription = db.subscriptions.find_one({"user_id": user_id})
+        subscription = await db.subscriptions.find_one({"user_id": user_id})
         if subscription:
             subscription_end = subscription.get("subscription_ends_at")
             if subscription_end and datetime.utcnow() < subscription_end:
