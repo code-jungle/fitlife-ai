@@ -9,6 +9,9 @@ import Index from "@/pages/Index";
 import LoginNew from "@/pages/LoginNew";
 import RegisterNew from "@/pages/RegisterNew";
 import DashboardNew from "@/pages/DashboardNew";
+import UpgradePremium from "@/pages/UpgradePremium";
+import PaymentSuccess from "@/pages/PaymentSuccess";
+import PaymentCancel from "@/pages/PaymentCancel";
 import NotFound from "@/pages/NotFound";
 import { useAuth } from "@/contexts/AuthContext";
 
