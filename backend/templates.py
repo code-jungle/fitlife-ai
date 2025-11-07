@@ -36,6 +36,9 @@ TREINO PRINCIPAL
 {day['main_workout']}
 
 ALONGAMENTO
+Mantenha cada posição de forma estática, sem forçar além do limite confortável.
+Respire profundamente durante o alongamento para melhor relaxamento muscular.
+
 {day['cooldown']}
 
 """
