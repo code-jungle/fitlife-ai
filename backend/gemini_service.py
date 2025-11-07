@@ -96,7 +96,9 @@ RETORNE APENAS ESTE JSON (sem texto extra):
   ]
 }}
 
-Gere 3 dias de treino (A, B, C) adaptados ao perfil. Seja específico e prático."""
+Gere 3 dias de treino (A, B, C) adaptados ao perfil. 
+Seja específico e prático.
+LEMBRE-SE: Alongamentos devem ter instruções detalhadas de execução!"""
 
         try:
             # Create a unique session for this request
