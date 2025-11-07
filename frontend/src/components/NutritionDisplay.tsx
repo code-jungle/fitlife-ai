@@ -47,17 +47,17 @@ const NutritionDisplay: React.FC<NutritionDisplayProps> = ({ content }) => {
       }
 
       // Meal sections (Café da manhã, Almoço, etc)
-      if (trimmedLine.match(/^(CAFÉ|ALMOÇO|JANTAR|LANCHE|CEIA)/i)) {
-        const mealEmoji = trimmedLine.includes('CAFÉ') ? '☕' :
-                         trimmedLine.includes('ALMOÇO') ? '🍽️' :
-                         trimmedLine.includes('JANTAR') ? '🌙' :
-                         trimmedLine.includes('CEIA') ? '🥛' : '🍎';
+      if (trimmedLine.match(/^(CAFÉ|ALMOÇO|JANTAR|LANCHE|CEIA|REFEIÇÃO)/i)) {
+        const mealEmoji = trimmedLine.match(/CAFÉ/i) ? '☕' :
+                         trimmedLine.match(/ALMOÇO/i) ? '🍽️' :
+                         trimmedLine.match(/JANTAR/i) ? '🌙' :
+                         trimmedLine.match(/CEIA/i) ? '🥛' : '🍎';
         
         formattedLines.push(
           <div key={lineKey++} className="flex items-center gap-2 mt-5 mb-2 p-3 rounded-lg bg-green-500/10 border border-green-500/20">
             <span className="text-2xl">{mealEmoji}</span>
             <h4 className="text-lg font-semibold text-foreground">
-              {trimmedLine.replace(/\*\*/g, '')}
+              {trimmedLine}
             </h4>
           </div>
         );
