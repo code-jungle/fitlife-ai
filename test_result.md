@@ -509,12 +509,7 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: 
-    - "Payment - Create checkout session"
-    - "Payment - Get checkout status"
-    - "Payment - Stripe webhook"
-    - "Subscription - Get status"
-    - "Subscription - Get packages"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
