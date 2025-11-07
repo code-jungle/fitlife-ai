@@ -10,7 +10,8 @@ from datetime import datetime, timedelta
 from models import (
     UserCreate, UserLogin, User, Token,
     Profile, ProfileUpdate, ProfileResponse,
-    SuggestionCreate, Suggestion, SuggestionResponse
+    SuggestionCreate, Suggestion, SuggestionResponse,
+    PaymentTransaction, CheckoutRequest
 )
 from auth import (
     get_password_hash, verify_password, create_access_token, get_current_user_email
