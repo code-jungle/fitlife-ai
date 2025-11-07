@@ -287,15 +287,18 @@ backend:
   
   - task: "Subscription - Get status"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py, payment_service.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint GET /api/subscription/status implementado. Retorna status da assinatura (trial, active, trial_ended) com dias restantes."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Subscription status endpoint working correctly. Returns is_premium, status (trial/active/trial_ended), and days_left. For new users, correctly shows trial status with 6-7 days remaining. Requires JWT authentication (403 without token). Fixed critical async/await bug in get_subscription_status method."
   
   - task: "Subscription - Get packages"
     implemented: true
