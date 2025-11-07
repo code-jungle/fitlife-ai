@@ -438,6 +438,54 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ PROFILE EDIT MODAL WORKING: Modal functionality implemented and accessible from dashboard. Ready to handle profile editing with all required fields."
+  
+  - task: "Payment Pages - Upgrade Premium"
+    implemented: true
+    working: "NA"
+    file: "pages/UpgradePremium.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Página de upgrade premium implementada com exibição de pacotes, status de trial/subscription, FAQ e botão de checkout. Integrada à rota /upgrade no App.tsx."
+  
+  - task: "Payment Pages - Payment Success"
+    implemented: true
+    working: "NA"
+    file: "pages/PaymentSuccess.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Página de sucesso do pagamento implementada. Verifica status do checkout via session_id e exibe confirmação com benefícios premium. Integrada à rota /payment-success no App.tsx."
+  
+  - task: "Payment Pages - Payment Cancel"
+    implemented: true
+    working: "NA"
+    file: "pages/PaymentCancel.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Página de cancelamento do pagamento implementada com botões para tentar novamente (/upgrade) ou voltar ao dashboard. Integrada à rota /payment-cancel no App.tsx."
+  
+  - task: "Dashboard - Premium button"
+    implemented: true
+    working: "NA"
+    file: "pages/DashboardNew.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Botão 'Seja Premium' adicionado ao header do dashboard, navegando para /upgrade."
 
 metadata:
   created_by: "main_agent"
