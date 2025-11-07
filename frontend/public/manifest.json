@@ -1,95 +1,26 @@
 {
-  "name": "FitLife AI - Treinos e Nutrição Personalizados",
+  "name": "FitLife AI - Fitness Personalizado",
   "short_name": "FitLife AI",
-  "description": "Transforme seu corpo com sugestões de treinos e nutrição personalizados por IA. Sua jornada fitness inteligente.",
+  "description": "Treinos e dietas personalizadas com inteligência artificial",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#101828",
-  "theme_color": "#101828",
+  "background_color": "#0a0118",
+  "theme_color": "#8B5CF6",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon-16.svg",
-      "sizes": "16x16",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-32.svg",
-      "sizes": "32x32",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-48.svg",
-      "sizes": "48x48",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-72.svg",
-      "sizes": "72x72",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-96.svg",
-      "sizes": "96x96",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-128.svg",
-      "sizes": "128x128",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-144.svg",
-      "sizes": "144x144",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-152.svg",
-      "sizes": "152x152",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-192.svg",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-384.svg",
-      "sizes": "384x384",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-512.svg",
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
   "categories": ["health", "fitness", "lifestyle"],
-  "screenshots": [
-    {
-      "src": "/screenshot-wide.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/screenshot-narrow.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ],
-  "lang": "pt-BR",
-  "dir": "ltr"
+  "screenshots": []
 }
