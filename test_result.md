@@ -257,15 +257,18 @@ backend:
   
   - task: "Payment - Get checkout status"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py, payment_service.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint GET /api/payments/checkout/status/{session_id} implementado para verificar status do pagamento e processar se bem-sucedido."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Checkout status endpoint working correctly. Returns status (open/complete), payment_status (unpaid/paid), amount_total, and currency. Successfully retrieves session information from Stripe. Requires JWT authentication."
   
   - task: "Payment - Stripe webhook"
     implemented: true
