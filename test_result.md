@@ -302,15 +302,18 @@ backend:
   
   - task: "Subscription - Get packages"
     implemented: true
-    working: "NA"
+    working: true
     file: "server.py, payment_service.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint GET /api/subscription/packages implementado. Retorna pacotes disponíveis (monthly_subscription com 7 dias trial e R$14,90/mês)."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Subscription packages endpoint working correctly. Returns monthly_subscription package with correct details: amount=14.90, currency=brl, trial_days=7. No authentication required (public endpoint)."
 
 frontend:
   - task: "Auth Context with JWT"
