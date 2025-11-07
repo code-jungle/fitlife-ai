@@ -239,6 +239,66 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ TESTED: Suggestion deletion endpoint working correctly. Deletes specific suggestions by ID with ownership verification. Returns 204 status on success."
+  
+  - task: "Payment - Create checkout session"
+    implemented: true
+    working: "NA"
+    file: "server.py, payment_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint POST /api/payments/checkout implementado com Stripe integration. Cria checkout session com trial de 7 dias + R$14,90/mês. URLs de success e cancel atualizadas para /payment-success e /payment-cancel."
+  
+  - task: "Payment - Get checkout status"
+    implemented: true
+    working: "NA"
+    file: "server.py, payment_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint GET /api/payments/checkout/status/{session_id} implementado para verificar status do pagamento e processar se bem-sucedido."
+  
+  - task: "Payment - Stripe webhook"
+    implemented: true
+    working: "NA"
+    file: "server.py, payment_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint POST /api/webhook/stripe implementado para receber webhooks do Stripe e processar pagamentos automaticamente."
+  
+  - task: "Subscription - Get status"
+    implemented: true
+    working: "NA"
+    file: "server.py, payment_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint GET /api/subscription/status implementado. Retorna status da assinatura (trial, active, trial_ended) com dias restantes."
+  
+  - task: "Subscription - Get packages"
+    implemented: true
+    working: "NA"
+    file: "server.py, payment_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint GET /api/subscription/packages implementado. Retorna pacotes disponíveis (monthly_subscription com 7 dias trial e R$14,90/mês)."
 
 frontend:
   - task: "Auth Context with JWT"
