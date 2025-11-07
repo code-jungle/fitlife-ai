@@ -102,9 +102,9 @@ class PaymentService:
         
         return False
     
-    def get_subscription_status(self, user_id: str, db) -> dict:
+    async def get_subscription_status(self, user_id: str, db) -> dict:
         """Get detailed subscription status"""
-        user_doc = db.users.find_one({"id": user_id})
+        user_doc = await db.users.find_one({"id": user_id})
         if not user_doc:
             return {
                 "is_premium": False,
@@ -125,7 +125,7 @@ class PaymentService:
             }
         
         # Check paid subscription
-        subscription = db.subscriptions.find_one({"user_id": user_id})
+        subscription = await db.subscriptions.find_one({"user_id": user_id})
         if subscription:
             subscription_end = subscription.get("subscription_ends_at")
             if subscription_end and datetime.utcnow() < subscription_end:
