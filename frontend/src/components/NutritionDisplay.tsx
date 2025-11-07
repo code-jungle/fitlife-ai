@@ -6,9 +6,21 @@ interface NutritionDisplayProps {
 }
 
 const NutritionDisplay: React.FC<NutritionDisplayProps> = ({ content }) => {
+  // Clean content: remove asterisks and markdown tables
+  const cleanContent = (text: string) => {
+    return text
+      .replace(/\*\*/g, '') // Remove bold asterisks
+      .replace(/\*/g, '') // Remove single asterisks
+      .split('\n')
+      .filter(line => !line.trim().match(/^\|.*\|$/)) // Remove markdown table rows
+      .filter(line => !line.trim().match(/^[-:| ]+$/)) // Remove table separators
+      .join('\n');
+  };
+
   // Parse the content to add formatting
   const formatContent = (text: string) => {
-    const lines = text.split('\n');
+    const cleanedText = cleanContent(text);
+    const lines = cleanedText.split('\n');
     const formattedLines: JSX.Element[] = [];
     let lineKey = 0;
 
