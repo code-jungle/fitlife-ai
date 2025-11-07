@@ -265,6 +265,13 @@ const DashboardNew = () => {
               <User className="w-4 h-4 mr-2" />
               Perfil
             </TabsTrigger>
+            <TabsTrigger 
+              value="premium" 
+              className="data-[state=active]:bg-gradient-primary"
+            >
+              <Crown className="w-4 h-4 mr-2" />
+              Premium
+            </TabsTrigger>
           </TabsList>
 
           {/* TAB 1: SUGESTÕES IA */}
