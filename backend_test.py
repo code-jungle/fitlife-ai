@@ -323,6 +323,173 @@ class FitLifeAPITester:
         else:
             self.log_test("Unauthorized Access Test", False, "Should have rejected request without token", response)
     
+    # ==================== PAYMENT TESTS ====================
+    
+    def test_get_subscription_packages(self):
+        """Test get available subscription packages (no auth required)"""
+        success, response = self.make_request("GET", "/subscription/packages")
+        
+        if success and response["status_code"] == 200:
+            data = response["data"]
+            if isinstance(data, dict) and "packages" in data:
+                packages = data.get("packages", [])
+                if len(packages) > 0:
+                    # Check for monthly_subscription package
+                    monthly_pkg = next((p for p in packages if p.get("id") == "monthly_subscription"), None)
+                    if monthly_pkg:
+                        amount = monthly_pkg.get("amount")
+                        currency = monthly_pkg.get("currency")
+                        trial_days = monthly_pkg.get("trial_days")
+                        if amount == 14.90 and currency == "brl" and trial_days == 7:
+                            self.log_test("Get Subscription Packages", True, f"Found monthly_subscription: R${amount} with {trial_days} days trial")
+                        else:
+                            self.log_test("Get Subscription Packages", False, f"Package details incorrect: amount={amount}, currency={currency}, trial_days={trial_days}", response)
+                    else:
+                        self.log_test("Get Subscription Packages", False, "monthly_subscription package not found", response)
+                else:
+                    self.log_test("Get Subscription Packages", False, "No packages returned", response)
+            else:
+                self.log_test("Get Subscription Packages", False, "Invalid response format", response)
+        else:
+            self.log_test("Get Subscription Packages", False, "Failed to get packages", response)
+    
+    def test_get_subscription_status(self):
+        """Test get user's subscription status (requires auth)"""
+        if not self.jwt_token:
+            self.log_test("Get Subscription Status", False, "No JWT token available")
+            return
+        
+        success, response = self.make_request("GET", "/subscription/status")
+        
+        if success and response["status_code"] == 200:
+            data = response["data"]
+            if isinstance(data, dict) and "is_premium" in data and "status" in data:
+                is_premium = data.get("is_premium")
+                status = data.get("status")
+                days_left = data.get("days_left")
+                
+                # For new user, should be in trial
+                if status == "trial" and is_premium and days_left is not None:
+                    self.log_test("Get Subscription Status", True, f"Status: {status}, Premium: {is_premium}, Days left: {days_left}")
+                elif status in ["active", "trial_ended"]:
+                    self.log_test("Get Subscription Status", True, f"Status: {status}, Premium: {is_premium}")
+                else:
+                    self.log_test("Get Subscription Status", False, f"Unexpected status: {status}", response)
+            else:
+                self.log_test("Get Subscription Status", False, "Invalid response format", response)
+        else:
+            self.log_test("Get Subscription Status", False, "Failed to get subscription status", response)
+    
+    def test_create_checkout_session(self):
+        """Test create Stripe checkout session (requires auth)"""
+        if not self.jwt_token:
+            self.log_test("Create Checkout Session", False, "No JWT token available")
+            return None
+        
+        checkout_data = {
+            "package_id": "monthly_subscription",
+            "origin_url": "https://fitgenai.preview.emergentagent.com"
+        }
+        
+        success, response = self.make_request("POST", "/payments/checkout", checkout_data)
+        
+        if success and response["status_code"] == 200:
+            data = response["data"]
+            if isinstance(data, dict) and "url" in data and "session_id" in data:
+                url = data.get("url")
+                session_id = data.get("session_id")
+                if url and session_id:
+                    self.log_test("Create Checkout Session", True, f"Checkout session created: {session_id[:20]}...")
+                    return session_id
+                else:
+                    self.log_test("Create Checkout Session", False, "URL or session_id is empty", response)
+            else:
+                self.log_test("Create Checkout Session", False, "Invalid response format", response)
+        else:
+            self.log_test("Create Checkout Session", False, "Failed to create checkout session", response)
+        
+        return None
+    
+    def test_create_checkout_invalid_package(self):
+        """Test create checkout with invalid package_id"""
+        if not self.jwt_token:
+            self.log_test("Create Checkout Invalid Package", False, "No JWT token available")
+            return
+        
+        checkout_data = {
+            "package_id": "invalid_package",
+            "origin_url": "https://fitgenai.preview.emergentagent.com"
+        }
+        
+        success, response = self.make_request("POST", "/payments/checkout", checkout_data)
+        
+        if not success and response["status_code"] == 400:
+            self.log_test("Create Checkout Invalid Package", True, "Correctly rejected invalid package_id")
+        else:
+            self.log_test("Create Checkout Invalid Package", False, "Should have rejected invalid package_id", response)
+    
+    def test_get_checkout_status(self, session_id: str):
+        """Test get checkout session status (requires auth)"""
+        if not self.jwt_token:
+            self.log_test("Get Checkout Status", False, "No JWT token available")
+            return
+        
+        if not session_id:
+            self.log_test("Get Checkout Status", False, "No session_id available")
+            return
+        
+        success, response = self.make_request("GET", f"/payments/checkout/status/{session_id}")
+        
+        if success and response["status_code"] == 200:
+            data = response["data"]
+            if isinstance(data, dict) and all(key in data for key in ["status", "payment_status"]):
+                status = data.get("status")
+                payment_status = data.get("payment_status")
+                amount_total = data.get("amount_total")
+                currency = data.get("currency")
+                self.log_test("Get Checkout Status", True, f"Status: {status}, Payment: {payment_status}, Amount: {amount_total} {currency}")
+            else:
+                self.log_test("Get Checkout Status", False, "Invalid response format", response)
+        else:
+            self.log_test("Get Checkout Status", False, "Failed to get checkout status", response)
+    
+    def test_subscription_status_requires_auth(self):
+        """Test that subscription status requires authentication"""
+        # Temporarily clear token
+        temp_token = self.jwt_token
+        self.jwt_token = None
+        
+        success, response = self.make_request("GET", "/subscription/status")
+        
+        # Restore token
+        self.jwt_token = temp_token
+        
+        if not success and response["status_code"] in [401, 403]:
+            self.log_test("Subscription Status Auth Test", True, f"Correctly requires authentication (HTTP {response['status_code']})")
+        else:
+            self.log_test("Subscription Status Auth Test", False, "Should require authentication", response)
+    
+    def test_checkout_requires_auth(self):
+        """Test that checkout creation requires authentication"""
+        # Temporarily clear token
+        temp_token = self.jwt_token
+        self.jwt_token = None
+        
+        checkout_data = {
+            "package_id": "monthly_subscription",
+            "origin_url": "https://fitgenai.preview.emergentagent.com"
+        }
+        
+        success, response = self.make_request("POST", "/payments/checkout", checkout_data)
+        
+        # Restore token
+        self.jwt_token = temp_token
+        
+        if not success and response["status_code"] in [401, 403]:
+            self.log_test("Checkout Auth Test", True, f"Correctly requires authentication (HTTP {response['status_code']})")
+        else:
+            self.log_test("Checkout Auth Test", False, "Should require authentication", response)
+    
     def run_all_tests(self):
         """Run all backend tests in sequence"""
         print("🚀 Starting FitLife AI Backend API Tests")
