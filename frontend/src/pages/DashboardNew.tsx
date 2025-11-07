@@ -287,10 +287,8 @@ const DashboardNew = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {workoutSuggestion ? (
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10 max-h-[400px] overflow-y-auto">
-                      <pre className="whitespace-pre-wrap text-sm text-foreground font-mono">
-                        {workoutSuggestion.content}
-                      </pre>
+                    <div className="max-h-[600px] overflow-y-auto custom-scrollbar">
+                      <WorkoutDisplay content={workoutSuggestion.content} />
                     </div>
                   ) : (
                     <p className="text-muted-foreground text-center py-8">
