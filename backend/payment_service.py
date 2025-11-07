@@ -157,7 +157,7 @@ class PaymentService:
         Returns: True if processed, False if already processed
         """
         # Check if already processed
-        existing_transaction = db.payment_transactions.find_one({
+        existing_transaction = await db.payment_transactions.find_one({
             "session_id": session_id,
             "payment_status": "paid"
         })
@@ -167,7 +167,7 @@ class PaymentService:
             return False
         
         # Update transaction status
-        db.payment_transactions.update_one(
+        await db.payment_transactions.update_one(
             {"session_id": session_id},
             {"$set": {
                 "payment_status": payment_status,
@@ -183,7 +183,7 @@ class PaymentService:
             subscription_end = datetime.utcnow() + timedelta(days=30)
             
             # Create or update subscription
-            db.subscriptions.update_one(
+            await db.subscriptions.update_one(
                 {"user_id": user_id},
                 {"$set": {
                     "user_id": user_id,
