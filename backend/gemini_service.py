@@ -138,46 +138,124 @@ Seja motivador e profissional! Este é um plano educacional."""
         bmi = self._calculate_bmi(profile.weight, profile.height)
         
         system_message = """Você é um nutricionista experiente especializado em criar planos alimentares acessíveis e práticos.
-Seu foco é em alimentos brasileiros comuns, baratos e fáceis de encontrar."""
+Seu foco é em alimentos brasileiros comuns, baratos e fáceis de encontrar.
+IMPORTANTE: Siga EXATAMENTE o formato especificado para garantir consistência visual."""
         
         prompt = f"""Crie um plano nutricional personalizado com base nas seguintes informações:
 
-**PERFIL DO ALUNO:**
-- Nome: {profile.full_name}
-- Idade: {profile.age} anos
-- Peso: {profile.weight} kg
-- Altura: {profile.height} cm
-- IMC: {bmi}
-- Objetivos: {profile.objectives}
-- Restrições alimentares: {profile.dietary_restrictions or "Nenhuma restrição"}
-- Nível de atividade: {profile.current_activities or "Sedentário"}
+PERFIL
+Nome: {profile.full_name}
+Idade: {profile.age} anos
+Peso: {profile.weight} kg
+Altura: {profile.height} cm
+IMC: {bmi}
+Objetivos: {profile.objectives}
+Restrições alimentares: {profile.dietary_restrictions or "Nenhuma restrição"}
+Nível de atividade: {profile.current_activities or "Sedentário"}
 
-**INSTRUÇÕES IMPORTANTES - ALIMENTOS ACESSÍVEIS:**
-1. PRIORIZE alimentos baratos e comuns no Brasil:
-   - Ovos, frango, carne moída
-   - Arroz, feijão, macarrão
-   - Batata, mandioca, banana
-   - Aveia, pão integral
-   - Leite, iogurte natural
-   - Frutas da estação (banana, laranja, maçã)
-   - Verduras comuns (alface, tomate, cenoura)
+INSTRUÇÕES - ALIMENTOS ACESSÍVEIS
+PRIORIZE alimentos baratos e comuns:
+- Ovos, frango, carne moída
+- Arroz, feijão, macarrão
+- Batata, mandioca, banana
+- Aveia, pão integral
+- Leite, iogurte natural
+- Frutas da estação
+- Verduras comuns
 
-2. EVITE alimentos caros ou difíceis de encontrar:
-   - ❌ Castanhas importadas
-   - ❌ Camarão, salmão
-   - ❌ Quinoa, chia
-   - ❌ Proteínas importadas
-   - ❌ Superfoods exóticos
+EVITE alimentos caros:
+- Castanhas importadas, salmão, quinoa, chia, superfoods exóticos
 
-3. Respeite as restrições alimentares mencionadas
-4. Calcule as calorias e macros aproximados
-5. Dê opções de substituição para cada refeição
-6. Inclua dicas de preparo simples e rápido
+FORMATO OBRIGATÓRIO - SIGA EXATAMENTE ESTA ESTRUTURA:
 
-**FORMATO DA RESPOSTA:**
-Retorne um plano com:
-- Meta calórica diária
-- Distribuição de macronutrientes
+PLANO NUTRICIONAL - {profile.full_name.upper()}
+
+METAS DIÁRIAS
+Calorias: [valor] kcal
+Proteínas: [valor]g
+Carboidratos: [valor]g
+Gorduras: [valor]g
+
+CAFÉ DA MANHÃ
+
+1. [Alimento] - [quantidade]
+2. [Alimento] - [quantidade]
+3. [Alimento] - [quantidade]
+
+Total: [calorias aproximadas]
+
+LANCHE DA MANHÃ
+
+1. [Alimento] - [quantidade]
+2. [Alimento] - [quantidade]
+
+Total: [calorias aproximadas]
+
+ALMOÇO
+
+1. [Alimento] - [quantidade]
+2. [Alimento] - [quantidade]
+3. [Alimento] - [quantidade]
+4. [Alimento] - [quantidade]
+
+Total: [calorias aproximadas]
+
+LANCHE DA TARDE
+
+1. [Alimento] - [quantidade]
+2. [Alimento] - [quantidade]
+
+Total: [calorias aproximadas]
+
+JANTAR
+
+1. [Alimento] - [quantidade]
+2. [Alimento] - [quantidade]
+3. [Alimento] - [quantidade]
+
+Total: [calorias aproximadas]
+
+CEIA
+
+1. [Alimento] - [quantidade]
+
+Total: [calorias aproximadas]
+
+LISTA DE COMPRAS SEMANAL
+- [Item] - Preço aproximado: R$ [valor]
+- [Item] - Preço aproximado: R$ [valor]
+[Continue...]
+
+Total estimado: R$ [valor]
+
+DICAS DE PREPARO
+- [Dica 1]
+- [Dica 2]
+- [Dica 3]
+
+DICAS DE ECONOMIA
+- [Dica 1]
+- [Dica 2]
+
+SUBSTITUIÇÕES POSSÍVEIS
+- [Alimento] pode ser substituído por [alternativa]
+- [Alimento] pode ser substituído por [alternativa]
+
+OBSERVAÇÕES IMPORTANTES
+- [Observação 1]
+- [Observação 2]
+
+REGRAS DE FORMATAÇÃO:
+- Use MAIÚSCULAS apenas para títulos de seções (CAFÉ DA MANHÃ, ALMOÇO, etc)
+- Liste alimentos numerados (1., 2., 3.)
+- Sempre inclua quantidade após o alimento
+- Use travessão (-) para listas de dicas
+- NÃO use asteriscos ou tabelas markdown
+- Mantenha espaçamento consistente
+- Seja claro e direto
+- Foque em alimentos BARATOS e ACESSÍVEIS
+
+Seja prático e realista! Foque em alimentação econômica e nutritiva.
 - Cardápio semanal com 5-6 refeições por dia:
   * Café da manhã
   * Lanche da manhã
